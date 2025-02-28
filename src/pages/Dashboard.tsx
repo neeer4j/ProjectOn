@@ -8,9 +8,10 @@ import {
   Card,
   CardContent,
 } from '@mui/material';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { styled } from '@mui/material/styles';
-import { GitHub as GitHubIcon, Analytics, Code, People, Storage, Speed, Security } from '@mui/icons-material';
+import { GitHub as GitHubIcon, Code, People, Speed } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const GradientTypography = styled(Typography)({
   background: 'linear-gradient(90deg, #6366F1, #EC4899)',
@@ -20,85 +21,106 @@ const GradientTypography = styled(Typography)({
 
 const services = [
   {
-    title: 'Project Management',
-    description: 'Streamline your development workflow with powerful project management tools.',
+    title: 'Software Development',
+    description: 'Custom software solutions tailored to your business needs. From desktop applications to enterprise systems, we deliver high-quality software that drives your success.',
     icon: <Code sx={{ fontSize: 40 }} />,
   },
   {
-    title: 'Team Collaboration',
-    description: 'Work seamlessly with your team members in real-time.',
-    icon: <People sx={{ fontSize: 40 }} />,
-  },
-  {
-    title: 'Analytics Dashboard',
-    description: 'Get insights into your project progress and team performance.',
-    icon: <Analytics sx={{ fontSize: 40 }} />,
-  },
-  {
-    title: 'Data Storage',
-    description: 'Secure cloud storage for all your project files and documents.',
-    icon: <Storage sx={{ fontSize: 40 }} />,
-  },
-  {
-    title: 'High Performance',
-    description: 'Lightning-fast project loading and real-time updates.',
+    title: 'Web Application',
+    description: 'Modern, responsive web applications built with cutting-edge technologies. Create powerful web experiences that engage users and scale with your business.',
     icon: <Speed sx={{ fontSize: 40 }} />,
   },
   {
-    title: 'Enterprise Security',
-    description: 'Advanced security features to protect your valuable data.',
-    icon: <Security sx={{ fontSize: 40 }} />,
+    title: 'Mobile Application',
+    description: 'Native and cross-platform mobile applications for iOS and Android. Deliver seamless mobile experiences that keep users coming back.',
+    icon: <People sx={{ fontSize: 40 }} />,
   },
 ];
 
 export default function Home() {
-  const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
-
+  const navigate = useNavigate();
+  
   return (
     <Box sx={{ overflowX: 'hidden' }}>
       {/* Hero Section */}
       <Box
         sx={{
           minHeight: '100vh',
-          background: 'linear-gradient(135deg, #1E293B 0%, #0F172A 100%)',
-          color: 'white',
           position: 'relative',
-          pt: { xs: 14, md: 22 }, // Increased padding to accommodate larger navbar
-          pb: { xs: 10, md: 15 },
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundImage: 'url(/images/rear-view-programmer-working-all-night-long.jpg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            zIndex: 0
+          },
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(15, 23, 42, 0.75)', // Dark overlay to ensure text readability
+            zIndex: 1
+          }
         }}
       >
-        <Container maxWidth={false} sx={{ px: { xs: 2, sm: 4, md: 6 } }}>
-          <Grid container spacing={4} alignItems="center">
-            <Grid item xs={12} md={6}>
+        <Container 
+          maxWidth={false} 
+          sx={{ 
+            px: { xs: 2, sm: 4, md: 6 },
+            position: 'relative',
+            zIndex: 2 // Place content above the background and overlay
+          }}
+        >
+          <Grid container spacing={4} alignItems="center" justifyContent="center">
+            <Grid item xs={12} md={10}>
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  width: '100%'
+                }}
               >
-                <GradientTypography variant="h2" sx={{ fontWeight: 800, mb: 3 }}>
-                  Transform Your Project Management Experience
+                <GradientTypography variant="h1" sx={{ 
+                  fontWeight: 800, 
+                  mb: 4,
+                  fontSize: { xs: '4.5rem', sm: '7rem', md: '11rem' },
+                  lineHeight: 1,
+                  textAlign: 'center',
+                  letterSpacing: '-0.02em',
+                  width: '100%'
+                }}>
+                  ProjectOn.
                 </GradientTypography>
-                <Typography variant="h5" sx={{ opacity: 0.9, mb: 4, lineHeight: 1.5 }}>
-                At ProjectOn, we turn ideas into reality by crafting cutting-edge web apps, mobile apps, and digital solutions tailored to your needs. Whether you're a startup looking for a sleek website, a business in need of a high-performance mobile app, or an entrepreneur with a groundbreaking tech idea, we've got you covered.
+                <Typography variant="h4" sx={{ 
+                  mb: 6, 
+                  lineHeight: 1.4,
+                  color: '#ffffff',
+                  textAlign: 'center',
+                  textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+                  fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
+                  fontWeight: 500,
+                  maxWidth: '900px',
+                  mx: 'auto'
+                }}>
+                  Code. Create. Innovate. – Powering the Future with Software.
                 </Typography>
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                  <Button
-                    variant="contained"
-                    size="large"
-                    sx={{
-                      py: 1.5,
-                      px: 4,
-                      background: 'linear-gradient(45deg, #6366F1 30%, #EC4899 90%)',
-                      boxShadow: '0 4px 14px 0 rgba(99, 102, 241, 0.4)',
-                      '&:hover': {
-                        background: 'linear-gradient(45deg, #4F46E5 30%, #DB2777 90%)',
-                        boxShadow: '0 6px 20px 0 rgba(99, 102, 241, 0.6)',
-                      }
-                    }}
-                  >
-                    Get Started Free
-                  </Button>
                   <Button
                     variant="outlined"
                     size="large"
@@ -116,28 +138,24 @@ export default function Home() {
                   >
                     View on GitHub
                   </Button>
+                  <Button
+                    onClick={() => navigate('/projects')}
+                    variant="contained"
+                    size="large"
+                    sx={{
+                      py: 1.5,
+                      px: 4,
+                      background: 'linear-gradient(45deg, #6366F1 30%, #EC4899 90%)',
+                      color: 'white',
+                      '&:hover': {
+                        transform: 'translateY(-2px)',
+                        boxShadow: '0 8px 16px rgba(99, 102, 241, 0.3)',
+                      }
+                    }}
+                  >
+                    Our Projects
+                  </Button>
                 </Stack>
-              </motion.div>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                style={{ y }}
-              >
-                <Box
-                  component="img"
-                  src="/hero-image.svg"
-                  alt="Project Management"
-                  sx={{
-                    width: '100%',
-                    maxWidth: 600,
-                    height: 'auto',
-                    display: 'block',
-                    margin: '0 auto',
-                  }}
-                />
               </motion.div>
             </Grid>
           </Grid>
@@ -152,7 +170,7 @@ export default function Home() {
               Our Services
             </Typography>
             <Typography variant="h6" sx={{ opacity: 0.8, maxWidth: 600, mx: 'auto' }}>
-              Everything you need to manage your projects effectively
+              Transforming ideas into powerful digital solutions
             </Typography>
           </Box>
 
@@ -215,50 +233,6 @@ export default function Home() {
               </Grid>
             ))}
           </Grid>
-        </Container>
-      </Box>
-
-      {/* CTA Section */}
-      <Box 
-        sx={{ 
-          py: { xs: 8, md: 12 },
-          background: 'linear-gradient(135deg, #1E293B 0%, #0F172A 100%)',
-          color: 'white',
-          textAlign: 'center'
-        }}
-      >
-        <Container maxWidth={false} sx={{ px: { xs: 2, sm: 4, md: 6 } }}>
-          <Box sx={{ maxWidth: '800px', mx: 'auto' }}>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <Typography variant="h3" gutterBottom sx={{ fontWeight: 700 }}>
-                Ready to Get Started?
-              </Typography>
-              <Typography sx={{ opacity: 0.8, mb: 4, maxWidth: 600, mx: 'auto' }}>
-                Join thousands of developers who are already using ProjectOn to streamline their development workflow.
-              </Typography>
-              <Button
-                variant="contained"
-                size="large"
-                sx={{
-                  py: 2,
-                  px: 6,
-                  background: 'linear-gradient(45deg, #6366F1 30%, #EC4899 90%)',
-                  boxShadow: '0 4px 14px 0 rgba(99, 102, 241, 0.4)',
-                  '&:hover': {
-                    background: 'linear-gradient(45deg, #4F46E5 30%, #DB2777 90%)',
-                    boxShadow: '0 6px 20px 0 rgba(99, 102, 241, 0.6)',
-                  }
-                }}
-              >
-                Start Your Free Trial
-              </Button>
-            </motion.div>
-          </Box>
         </Container>
       </Box>
     </Box>

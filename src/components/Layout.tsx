@@ -8,7 +8,6 @@ import {
   List,
   ListItemIcon,
   Toolbar,
-  Stack,
   Button,
 } from '@mui/material';
 import {
@@ -133,34 +132,6 @@ export default function Layout({ children }: LayoutProps) {
               onClick={() => navigate('/')}
             />
             <Box sx={{ flexGrow: 1 }} />
-            <Stack 
-              direction="row" 
-              spacing={3} 
-              alignItems="center"
-            >
-              <Button
-                onClick={() => navigate('/projects')}
-                variant="contained"
-                sx={{
-                  color: 'white',
-                  fontSize: '1rem',
-                  textTransform: 'none',
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  backdropFilter: 'blur(10px)',
-                  borderRadius: '12px',
-                  py: 1.2,
-                  px: 3,
-                  '&:hover': {
-                    background: 'rgba(255, 255, 255, 0.2)',
-                    transform: 'translateY(-2px)',
-                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
-                  },
-                  transition: 'all 0.3s ease-in-out'
-                }}
-              >
-                Our Projects
-              </Button>
-            </Stack>
           </Toolbar>
         </AppBar>
         <Box component="main" sx={{ width: '100%' }}>
@@ -175,9 +146,12 @@ export default function Layout({ children }: LayoutProps) {
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <AppBar 
           position="fixed" 
+          color="transparent" 
+          elevation={0}
           sx={{ 
-            background: 'linear-gradient(45deg, #6366F1 30%, #EC4899 90%)',
-            height: 80
+            backdropFilter: 'blur(8px)',
+            backgroundColor: 'rgba(30, 41, 59, 0.8)',
+            width: '100%'
           }}
         >
           <Toolbar sx={{ height: 80, maxWidth: '100%', px: { xs: 2, sm: 4, md: 6 } }}>
@@ -188,10 +162,12 @@ export default function Layout({ children }: LayoutProps) {
               sx={{ 
                 height: 40,
                 width: 'auto',
+                mr: 2,
                 cursor: 'pointer'
               }}
               onClick={() => navigate('/')}
             />
+            <Box sx={{ flexGrow: 1 }} />
           </Toolbar>
         </AppBar>
         <Box
@@ -200,7 +176,7 @@ export default function Layout({ children }: LayoutProps) {
             flexGrow: 1,
             p: { xs: 2, sm: 4, md: 6 },
             width: '100%',
-            marginTop: '80px',
+            pt: '80px', // Changed from marginTop to paddingTop for better spacing
           }}
         >
           {children}

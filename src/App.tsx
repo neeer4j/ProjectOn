@@ -7,16 +7,16 @@ import Projects from './pages/Projects';
 
 const theme = createTheme({
   palette: {
-    mode: 'light',
+    mode: 'dark',
     primary: {
       main: '#6366F1', // Indigo
       light: '#818CF8',
       dark: '#4F46E5',
     },
     secondary: {
-      main: '#EC4899', // Pink
-      light: '#F472B6',
-      dark: '#DB2777',
+      main: '#0EA5E9', // Changed to a blue that matches the image better
+      light: '#38BDF8',
+      dark: '#0284C7',
     },
     info: {
       main: '#0EA5E9', // Sky blue
@@ -39,12 +39,12 @@ const theme = createTheme({
       dark: '#DC2626',
     },
     background: {
-      default: '#ffffff',
-      paper: '#ffffff',
+      default: '#0F172A', // Darker blue-gray that matches the image
+      paper: 'rgba(15, 23, 42, 0.8)',
     },
     text: {
-      primary: '#1E293B',
-      secondary: '#475569',
+      primary: 'rgba(255, 255, 255, 0.95)',
+      secondary: 'rgba(255, 255, 255, 0.7)',
     },
     grey: {
       50: '#F8FAFC',

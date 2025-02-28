@@ -9,12 +9,16 @@ import {
   ListItemIcon,
   Toolbar,
   Button,
+  Stack,
 } from '@mui/material';
 import {
   Menu as MenuIcon,
   Home as HomeIcon,
   Code as CodeIcon,
+  Info as InfoIcon,
+  ContactSupport as ContactIcon,
 } from '@mui/icons-material';
+import Footer from './Footer';
 
 const drawerWidth = 280;
 
@@ -101,20 +105,54 @@ export default function Layout({ children }: LayoutProps) {
         >
           Our Projects
         </Button>
+        <Button
+          startIcon={
+            <ListItemIcon sx={{ minWidth: 40 }}>
+              <InfoIcon />
+            </ListItemIcon>
+          }
+          sx={{
+            width: '90%',
+            justifyContent: 'flex-start',
+            mx: 1,
+            mb: 1,
+            py: 1.5,
+            borderRadius: 2,
+          }}
+        >
+          About Us
+        </Button>
+        <Button
+          startIcon={
+            <ListItemIcon sx={{ minWidth: 40 }}>
+              <ContactIcon />
+            </ListItemIcon>
+          }
+          sx={{
+            width: '90%',
+            justifyContent: 'flex-start',
+            mx: 1,
+            mb: 1,
+            py: 1.5,
+            borderRadius: 2,
+          }}
+        >
+          Contact Us
+        </Button>
       </List>
     </Box>
   );
 
   if (isHomePage) {
     return (
-      <Box>
+      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <AppBar 
           position="fixed" 
           color="transparent" 
           elevation={0}
           sx={{ 
             backdropFilter: 'blur(8px)',
-            backgroundColor: 'rgba(30, 41, 59, 0.8)',
+            backgroundColor: 'rgba(15, 23, 42, 0.85)', // Darker blue-gray matching theme
             width: '100%'
           }}
         >
@@ -132,25 +170,66 @@ export default function Layout({ children }: LayoutProps) {
               onClick={() => navigate('/')}
             />
             <Box sx={{ flexGrow: 1 }} />
+            <Stack 
+              direction="row" 
+              spacing={2}
+              sx={{
+                display: { xs: 'none', md: 'flex' }
+              }}
+            >
+              <Button
+                sx={{
+                  color: 'white',
+                  fontSize: '1rem',
+                  '&:hover': {
+                    color: '#6366F1'
+                  }
+                }}
+                startIcon={<InfoIcon />}
+              >
+                About Us
+              </Button>
+              <Button
+                sx={{
+                  color: 'white',
+                  fontSize: '1rem',
+                  '&:hover': {
+                    color: '#6366F1'
+                  }
+                }}
+                startIcon={<ContactIcon />}
+              >
+                Contact Us
+              </Button>
+            </Stack>
+            <IconButton
+              color="inherit"
+              edge="end"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              sx={{ ml: 2, display: { md: 'none' } }}
+            >
+              <MenuIcon />
+            </IconButton>
           </Toolbar>
         </AppBar>
-        <Box component="main" sx={{ width: '100%' }}>
+        <Box component="main" sx={{ width: '100%', flexGrow: 1 }}>
           {children}
         </Box>
+        <Footer />
       </Box>
     );
   }
 
   if (isProjectsPage) {
     return (
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <AppBar 
           position="fixed" 
           color="transparent" 
           elevation={0}
           sx={{ 
             backdropFilter: 'blur(8px)',
-            backgroundColor: 'rgba(30, 41, 59, 0.8)',
+            backgroundColor: 'rgba(15, 23, 42, 0.85)', // Darker blue-gray matching theme
             width: '100%'
           }}
         >
@@ -168,6 +247,46 @@ export default function Layout({ children }: LayoutProps) {
               onClick={() => navigate('/')}
             />
             <Box sx={{ flexGrow: 1 }} />
+            <Stack 
+              direction="row" 
+              spacing={2}
+              sx={{
+                display: { xs: 'none', md: 'flex' }
+              }}
+            >
+              <Button
+                sx={{
+                  color: 'white',
+                  fontSize: '1rem',
+                  '&:hover': {
+                    color: '#6366F1'
+                  }
+                }}
+                startIcon={<InfoIcon />}
+              >
+                About Us
+              </Button>
+              <Button
+                sx={{
+                  color: 'white',
+                  fontSize: '1rem',
+                  '&:hover': {
+                    color: '#6366F1'
+                  }
+                }}
+                startIcon={<ContactIcon />}
+              >
+                Contact Us
+              </Button>
+            </Stack>
+            <IconButton
+              color="inherit"
+              edge="end"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              sx={{ ml: 2, display: { md: 'none' } }}
+            >
+              <MenuIcon />
+            </IconButton>
           </Toolbar>
         </AppBar>
         <Box
@@ -181,17 +300,18 @@ export default function Layout({ children }: LayoutProps) {
         >
           {children}
         </Box>
+        <Footer />
       </Box>
     );
   }
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <AppBar 
         position="fixed" 
         sx={{ 
           zIndex: (theme) => theme.zIndex.drawer + 1,
-          background: 'linear-gradient(45deg, #6366F1 30%, #EC4899 90%)',
+          background: 'rgba(15, 23, 42, 0.95)', // Darker blue-gray matching theme
           width: '100%',
           height: 80
         }}
@@ -256,6 +376,7 @@ export default function Layout({ children }: LayoutProps) {
       >
         {children}
       </Box>
+      <Footer />
     </Box>
   );
 }

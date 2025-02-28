@@ -100,7 +100,7 @@ export default function Layout({ children }: LayoutProps) {
             }
           }}
         >
-          Projects
+          Our Projects
         </Button>
       </List>
     </Box>
@@ -140,34 +140,25 @@ export default function Layout({ children }: LayoutProps) {
             >
               <Button
                 onClick={() => navigate('/projects')}
+                variant="contained"
                 sx={{
                   color: 'white',
                   fontSize: '1rem',
                   textTransform: 'none',
-                  '&:hover': {
-                    background: 'rgba(255, 255, 255, 0.1)',
-                  }
-                }}
-              >
-                Projects
-              </Button>
-              <Button
-                variant="contained"
-                sx={{
-                  py: 1.5,
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(10px)',
+                  borderRadius: '12px',
+                  py: 1.2,
                   px: 3,
-                  background: 'linear-gradient(45deg, #6366F1 30%, #EC4899 90%)',
-                  boxShadow: '0 4px 14px 0 rgba(99, 102, 241, 0.4)',
                   '&:hover': {
-                    background: 'linear-gradient(45deg, #4F46E5 30%, #DB2777 90%)',
-                    boxShadow: '0 6px 20px 0 rgba(99, 102, 241, 0.6)',
+                    background: 'rgba(255, 255, 255, 0.2)',
                     transform: 'translateY(-2px)',
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
                   },
-                  fontSize: '1rem',
-                  transition: 'all 0.2s ease-in-out'
+                  transition: 'all 0.3s ease-in-out'
                 }}
               >
-                Get Started
+                Our Projects
               </Button>
             </Stack>
           </Toolbar>

@@ -11,7 +11,6 @@ import {
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { styled } from '@mui/material/styles';
 import { GitHub as GitHubIcon, Analytics, Code, People, Storage, Speed, Security } from '@mui/icons-material';
-import { useInView } from 'react-intersection-observer';
 
 const GradientTypography = styled(Typography)({
   background: 'linear-gradient(90deg, #6366F1, #EC4899)',

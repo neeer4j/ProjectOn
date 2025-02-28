@@ -11,7 +11,6 @@ import {
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { styled } from '@mui/material/styles';
 import { GitHub as GitHubIcon, Analytics, Code, People, Storage, Speed, Security } from '@mui/icons-material';
-import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
 
 const GradientTypography = styled(Typography)({
@@ -19,33 +18,6 @@ const GradientTypography = styled(Typography)({
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent'
 });
-
-const StatsCard = ({ value, label }: { value: number; label: string }) => {
-  const [ref, inView] = useInView({
-    threshold: 0.3,
-    triggerOnce: true,
-  });
-
-  return (
-    <Card 
-      ref={ref}
-      sx={{ 
-        textAlign: 'center',
-        p: 3,
-        background: 'rgba(255, 255, 255, 0.1)',
-        backdropFilter: 'blur(10px)',
-        border: '1px solid rgba(255, 255, 255, 0.2)'
-      }}
-    >
-      <Typography variant="h3" sx={{ color: '#EC4899', fontWeight: 700 }}>
-        {inView ? <CountUp end={value} duration={2.5} /> : '0'}+
-      </Typography>
-      <Typography variant="body1" sx={{ color: 'white', opacity: 0.9, mt: 1 }}>
-        {label}
-      </Typography>
-    </Card>
-  );
-};
 
 const services = [
   {
@@ -109,7 +81,7 @@ export default function Home() {
                   Transform Your Project Management Experience
                 </GradientTypography>
                 <Typography variant="h5" sx={{ opacity: 0.9, mb: 4, lineHeight: 1.5 }}>
-                  Streamline collaboration, boost productivity, and deliver exceptional results with our comprehensive project management platform.
+                At ProjectOn, we turn ideas into reality by crafting cutting-edge web apps, mobile apps, and digital solutions tailored to your needs. Whether you're a startup looking for a sleek website, a business in need of a high-performance mobile app, or an entrepreneur with a groundbreaking tech idea, we've got you covered.
                 </Typography>
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                   <Button
@@ -168,41 +140,6 @@ export default function Home() {
                   }}
                 />
               </motion.div>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
-
-      {/* Stats Section */}
-      <Box
-        sx={{
-          position: 'relative',
-          background: 'linear-gradient(135deg, #6366F1 0%, #EC4899 100%)',
-          py: { xs: 8, md: 12 },
-          '&::before': {
-            content: '""',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'url("data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.05\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'20\' cy=\'20\' r=\'3\'/%3E%3C/g%3E%3C/svg%3E")',
-          }
-        }}
-      >
-        <Container maxWidth={false} sx={{ px: { xs: 2, sm: 4, md: 6 }, position: 'relative' }}>
-          <Grid container spacing={4}>
-            <Grid item xs={12} sm={6} md={3}>
-              <StatsCard value={1000} label="Active Users" />
-            </Grid>
-            <Grid item xs={12} sm={6} md={3}>
-              <StatsCard value={500} label="Projects Completed" />
-            </Grid>
-            <Grid item xs={12} sm={6} md={3}>
-              <StatsCard value={50} label="Team Collaborations" />
-            </Grid>
-            <Grid item xs={12} sm={6} md={3}>
-              <StatsCard value={99} label="Client Satisfaction" />
             </Grid>
           </Grid>
         </Container>

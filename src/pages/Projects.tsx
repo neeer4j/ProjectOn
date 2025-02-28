@@ -1,195 +1,171 @@
 import {
   Box,
+  Container,
+  Typography,
   Card,
   CardContent,
-  Typography,
-  Grid,
-  Chip,
-  IconButton,
+  CardMedia,
   Button,
   Stack,
-  Container,
+  Chip,
+  Grid,
 } from '@mui/material';
-import { GitHub as GitHubIcon, Link as LinkIcon } from '@mui/icons-material';
+import { motion } from 'framer-motion';
+import { Launch as LaunchIcon } from '@mui/icons-material';
+
+interface Project {
+  title: string;
+  subtitle: string;
+  description: string;
+  image: string;
+  technologies: string[];
+  link: string;
+}
 
 export default function Projects() {
-  const projects = [
+  const projects: Project[] = [
     {
-      id: 1,
-      name: 'Algorithm Visualizer',
-      description: 'Interactive tool for visualizing sorting and pathfinding algorithms',
-      technologies: ['React', 'TypeScript', 'D3.js'],
-      category: 'Algorithms',
-      difficulty: 'Intermediate',
-      githubLink: 'https://github.com/example/algo-viz',
+      title: "MindEase",
+      subtitle: "Mental Health & Wellness Platform",
+      description: "A comprehensive mental health platform offering meditation guides, mood tracking, and personalized support for mental wellbeing. Features include daily mindfulness exercises, progress tracking, and expert-curated content for emotional wellness.",
+      image: "https://images.unsplash.com/photo-1579403124614-197f69d8187b?q=80&w=2064",
+      technologies: ["React", "Firebase", "Material UI", "TypeScript", "Node.js"],
+      link: "https://mindease-dbed7.web.app/"
     },
     {
-      id: 2,
-      name: 'Database Manager',
-      description: 'A GUI application for managing SQL databases with query visualization',
-      technologies: ['React', 'Node.js', 'SQLite'],
-      category: 'Databases',
-      difficulty: 'Advanced',
-      githubLink: 'https://github.com/example/db-manager',
-    },
-    {
-      id: 3,
-      name: 'Compiler Design',
-      description: 'Simple compiler implementation for a custom programming language',
-      technologies: ['Python', 'LLVM'],
-      category: 'Systems',
-      difficulty: 'Advanced',
-      githubLink: 'https://github.com/example/mini-compiler',
-    },
+      title: "CodeYatra",
+      subtitle: "Interactive Learning Platform",
+      description: "A dynamic coding education platform designed to make learning programming accessible and engaging. Features interactive tutorials, coding challenges, and a comprehensive learning path for aspiring developers.",
+      image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?q=80&w=2074",
+      technologies: ["Next.js", "React", "Tailwind CSS", "MongoDB", "Node.js"],
+      link: "https://codeyatra-iota.vercel.app/"
+    }
   ];
 
   return (
     <Container maxWidth={false} sx={{ px: { xs: 2, sm: 4, md: 6 } }}>
-      <Box sx={{ py: 4 }}>
-        <Stack 
-          direction="row" 
-          justifyContent="space-between" 
-          alignItems="center" 
-          mb={4}
-          sx={{
-            background: 'linear-gradient(135deg, #6366F1 0%, #EC4899 100%)',
-            p: 3,
-            borderRadius: 2,
-            color: 'white'
-          }}
+      <Box sx={{ py: 6 }}>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
         >
-          <Typography variant="h4" sx={{ fontWeight: 600 }}>CS Projects</Typography>
-          <Button 
-            variant="contained"
-            color="secondary"
-            sx={{
-              background: 'rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              color: 'white',
-              '&:hover': {
-                background: 'rgba(255, 255, 255, 0.2)',
-              }
-            }}
-          >
-            Add New Project
-          </Button>
-        </Stack>
+          <Typography variant="h4" sx={{ fontWeight: 700, mb: 4, color: '#1E293B' }}>
+            Featured Projects
+          </Typography>
+        </motion.div>
 
         <Grid container spacing={4}>
-          {projects.map((project) => (
-            <Grid item xs={12} md={6} key={project.id}>
-              <Card 
-                sx={{ 
-                  height: '100%',
-                  transition: 'all 0.3s ease-in-out',
-                  '&:hover': {
-                    transform: 'translateY(-8px)',
-                    boxShadow: '0 12px 40px -8px rgba(99, 102, 241, 0.25)',
-                    '& .project-tech': {
-                      borderColor: 'primary.main',
-                    }
-                  }
-                }}
-                elevation={0}
+          {projects.map((project, index) => (
+            <Grid item xs={12} key={project.title}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
               >
-                <CardContent sx={{ p: 3 }}>
-                  <Typography variant="h6" gutterBottom sx={{ fontWeight: 600, color: 'primary.main' }}>
-                    {project.name}
-                  </Typography>
-                  <Typography 
-                    color="textSecondary" 
-                    gutterBottom
-                    sx={{ 
-                      fontSize: '0.95rem',
-                      mb: 2.5
-                    }}
-                  >
-                    {project.description}
-                  </Typography>
-                  <Box mt={2} mb={3}>
-                    {project.technologies.map((tech) => (
-                      <Chip
-                        key={tech}
-                        label={tech}
-                        size="small"
-                        className="project-tech"
-                        sx={{ 
-                          mr: 1, 
-                          mb: 1,
-                          borderRadius: 1.5,
-                          border: '1px solid',
-                          borderColor: 'grey.200',
-                          background: 'transparent',
-                          transition: 'all 0.3s ease-in-out',
-                          '& .MuiChip-label': {
-                            fontWeight: 500,
-                            color: 'primary.main'
-                          }
-                        }}
-                      />
-                    ))}
+                <Card
+                  sx={{
+                    maxWidth: '100%',
+                    borderRadius: 4,
+                    overflow: 'hidden',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                    transition: 'transform 0.3s ease-in-out',
+                    '&:hover': {
+                      transform: 'translateY(-8px)',
+                      '& .project-image': {
+                        transform: 'scale(1.05)'
+                      }
+                    }
+                  }}
+                >
+                  <Box sx={{ position: 'relative', height: 300, overflow: 'hidden' }}>
+                    <CardMedia
+                      component="img"
+                      image={project.image}
+                      alt={`${project.title} Project`}
+                      className="project-image"
+                      sx={{
+                        height: '100%',
+                        objectFit: 'cover',
+                        transition: 'transform 0.5s ease'
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        background: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 100%)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'flex-end',
+                        p: 3
+                      }}
+                    >
+                      <Typography variant="h4" sx={{ color: 'white', fontWeight: 700, mb: 1 }}>
+                        {project.title}
+                      </Typography>
+                      <Typography variant="subtitle1" sx={{ color: 'rgba(255,255,255,0.9)' }}>
+                        {project.subtitle}
+                      </Typography>
+                    </Box>
                   </Box>
-                  <Stack direction="row" justifyContent="space-between" alignItems="center">
-                    <Box>
-                      <Chip
-                        label={project.category}
-                        color="primary"
-                        size="small"
-                        sx={{ 
-                          mr: 1,
-                          borderRadius: 1.5,
-                          background: 'linear-gradient(135deg, #6366F1 0%, #818CF8 100%)',
-                          '& .MuiChip-label': {
+
+                  <CardContent sx={{ p: 4 }}>
+                    <Typography variant="body1" sx={{ mb: 3, color: 'text.secondary', lineHeight: 1.7 }}>
+                      {project.description}
+                    </Typography>
+
+                    <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ mb: 4 }}>
+                      {project.technologies.map((tech) => (
+                        <Chip
+                          key={tech}
+                          label={tech}
+                          sx={{
+                            m: 0.5,
+                            background: 'rgba(99, 102, 241, 0.1)',
+                            color: '#6366F1',
                             fontWeight: 500,
-                            color: 'white'
-                          }
-                        }}
-                      />
-                      <Chip
-                        label={project.difficulty}
-                        color="secondary"
-                        size="small"
-                        sx={{ 
-                          borderRadius: 1.5,
-                          background: 'linear-gradient(135deg, #EC4899 0%, #F472B6 100%)',
-                          '& .MuiChip-label': {
-                            fontWeight: 500,
-                            color: 'white'
-                          }
-                        }}
-                      />
-                    </Box>
-                    <Box>
-                      <IconButton
-                        href={project.githubLink}
+                            '&:hover': {
+                              background: 'rgba(99, 102, 241, 0.2)',
+                            }
+                          }}
+                        />
+                      ))}
+                    </Stack>
+
+                    <Stack 
+                      direction="row" 
+                      spacing={2}
+                      sx={{
+                        borderTop: '1px solid',
+                        borderColor: 'divider',
+                        pt: 3
+                      }}
+                    >
+                      <Button
+                        variant="contained"
+                        endIcon={<LaunchIcon />}
+                        href={project.link}
                         target="_blank"
-                        size="small"
-                        sx={{ 
-                          mr: 1,
-                          color: 'primary.main',
+                        rel="noopener noreferrer"
+                        sx={{
+                          background: 'linear-gradient(45deg, #6366F1 30%, #EC4899 90%)',
+                          boxShadow: '0 4px 14px 0 rgba(99, 102, 241, 0.4)',
                           '&:hover': {
-                            background: 'rgba(99, 102, 241, 0.1)'
+                            background: 'linear-gradient(45deg, #4F46E5 30%, #DB2777 90%)',
+                            boxShadow: '0 6px 20px 0 rgba(99, 102, 241, 0.6)',
                           }
                         }}
                       >
-                        <GitHubIcon />
-                      </IconButton>
-                      <IconButton 
-                        size="small"
-                        sx={{ 
-                          color: 'secondary.main',
-                          '&:hover': {
-                            background: 'rgba(236, 72, 153, 0.1)'
-                          }
-                        }}
-                      >
-                        <LinkIcon />
-                      </IconButton>
-                    </Box>
-                  </Stack>
-                </CardContent>
-              </Card>
+                        Visit Project
+                      </Button>
+                    </Stack>
+                  </CardContent>
+                </Card>
+              </motion.div>
             </Grid>
           ))}
         </Grid>

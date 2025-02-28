@@ -14,7 +14,6 @@ import {
 import {
   Menu as MenuIcon,
   Home as HomeIcon,
-  Group as GroupIcon,
   Code as CodeIcon,
 } from '@mui/icons-material';
 
@@ -29,12 +28,7 @@ export default function Layout({ children }: LayoutProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const isHomePage = location.pathname === '/';
-
-  const menuItems = [
-    { text: 'Home', icon: <HomeIcon />, path: '/' },
-    { text: 'Projects', icon: <CodeIcon />, path: '/projects' },
-    { text: 'Team', icon: <GroupIcon />, path: '/team' },
-  ];
+  const isProjectsPage = location.pathname === '/projects';
 
   const drawer = (
     <Box>
@@ -52,37 +46,62 @@ export default function Layout({ children }: LayoutProps) {
         />
       </Toolbar>
       <List>
-        {menuItems.map((item) => (
-          <Button
-            key={item.text}
-            onClick={() => navigate(item.path)}
-            startIcon={
-              <ListItemIcon sx={{ 
-                color: location.pathname === item.path ? '#6366F1' : 'inherit',
-                minWidth: 40
-              }}>
-                {item.icon}
-              </ListItemIcon>
+        <Button
+          onClick={() => navigate('/')}
+          startIcon={
+            <ListItemIcon sx={{ 
+              color: location.pathname === '/' ? '#6366F1' : 'inherit',
+              minWidth: 40
+            }}>
+              <HomeIcon />
+            </ListItemIcon>
+          }
+          sx={{
+            width: '90%',
+            justifyContent: 'flex-start',
+            mx: 1,
+            mb: 1,
+            py: 1.5,
+            borderRadius: 2,
+            color: location.pathname === '/' ? '#6366F1' : 'inherit',
+            backgroundColor: location.pathname === '/' ? 'rgba(99, 102, 241, 0.1)' : 'transparent',
+            '&:hover': {
+              backgroundColor: location.pathname === '/' 
+                ? 'rgba(99, 102, 241, 0.2)' 
+                : 'rgba(0, 0, 0, 0.04)'
             }
-            sx={{
-              width: '90%',
-              justifyContent: 'flex-start',
-              mx: 1,
-              mb: 1,
-              py: 1.5,
-              borderRadius: 2,
-              color: location.pathname === item.path ? '#6366F1' : 'inherit',
-              backgroundColor: location.pathname === item.path ? 'rgba(99, 102, 241, 0.1)' : 'transparent',
-              '&:hover': {
-                backgroundColor: location.pathname === item.path 
-                  ? 'rgba(99, 102, 241, 0.2)' 
-                  : 'rgba(0, 0, 0, 0.04)'
-              }
-            }}
-          >
-            {item.text}
-          </Button>
-        ))}
+          }}
+        >
+          Home
+        </Button>
+        <Button
+          onClick={() => navigate('/projects')}
+          startIcon={
+            <ListItemIcon sx={{ 
+              color: location.pathname === '/projects' ? '#6366F1' : 'inherit',
+              minWidth: 40
+            }}>
+              <CodeIcon />
+            </ListItemIcon>
+          }
+          sx={{
+            width: '90%',
+            justifyContent: 'flex-start',
+            mx: 1,
+            mb: 1,
+            py: 1.5,
+            borderRadius: 2,
+            color: location.pathname === '/projects' ? '#6366F1' : 'inherit',
+            backgroundColor: location.pathname === '/projects' ? 'rgba(99, 102, 241, 0.1)' : 'transparent',
+            '&:hover': {
+              backgroundColor: location.pathname === '/projects' 
+                ? 'rgba(99, 102, 241, 0.2)' 
+                : 'rgba(0, 0, 0, 0.04)'
+            }
+          }}
+        >
+          Projects
+        </Button>
       </List>
     </Box>
   );
@@ -119,25 +138,19 @@ export default function Layout({ children }: LayoutProps) {
               spacing={3} 
               alignItems="center"
             >
-              {menuItems.slice(1).map((item) => (
-                <Button
-                  key={item.text}
-                  onClick={() => navigate(item.path)}
-                  sx={{ 
-                    color: 'white',
-                    px: 2,
-                    py: 1.5,
-                    fontSize: '1rem',
-                    '&:hover': { 
-                      background: 'rgba(255, 255, 255, 0.1)',
-                      transform: 'translateY(-2px)',
-                    },
-                    transition: 'all 0.2s ease-in-out'
-                  }}
-                >
-                  {item.text}
-                </Button>
-              ))}
+              <Button
+                onClick={() => navigate('/projects')}
+                sx={{
+                  color: 'white',
+                  fontSize: '1rem',
+                  textTransform: 'none',
+                  '&:hover': {
+                    background: 'rgba(255, 255, 255, 0.1)',
+                  }
+                }}
+              >
+                Projects
+              </Button>
               <Button
                 variant="contained"
                 sx={{
@@ -160,6 +173,45 @@ export default function Layout({ children }: LayoutProps) {
           </Toolbar>
         </AppBar>
         <Box component="main" sx={{ width: '100%' }}>
+          {children}
+        </Box>
+      </Box>
+    );
+  }
+
+  if (isProjectsPage) {
+    return (
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <AppBar 
+          position="fixed" 
+          sx={{ 
+            background: 'linear-gradient(45deg, #6366F1 30%, #EC4899 90%)',
+            height: 80
+          }}
+        >
+          <Toolbar sx={{ height: 80, maxWidth: '100%', px: { xs: 2, sm: 4, md: 6 } }}>
+            <Box 
+              component="img" 
+              src="/logo.svg" 
+              alt="ProjectOn Logo" 
+              sx={{ 
+                height: 40,
+                width: 'auto',
+                cursor: 'pointer'
+              }}
+              onClick={() => navigate('/')}
+            />
+          </Toolbar>
+        </AppBar>
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            p: { xs: 2, sm: 4, md: 6 },
+            width: '100%',
+            marginTop: '80px',
+          }}
+        >
           {children}
         </Box>
       </Box>

@@ -3,6 +3,7 @@ import { createTheme } from '@mui/material/styles';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Dashboard';
+import Projects from './pages/Projects';
 
 const theme = createTheme({
   palette: {
@@ -140,6 +141,7 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<Projects />} />
           </Routes>
         </Layout>
       </BrowserRouter>

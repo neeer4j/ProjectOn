@@ -76,7 +76,7 @@ const Loading = () => {
           sx={{
             width: '60px',
             height: '60px',
-            border: theme => `3px solid ${isDarkMode ? 'rgba(99, 102, 241, 0.3)' : 'rgba(99, 102, 241, 0.2)'}`,
+            border: `3px solid ${isDarkMode ? 'rgba(99, 102, 241, 0.3)' : 'rgba(99, 102, 241, 0.2)'}`,
             borderTop: '3px solid #6366F1',
             borderRadius: '50%',
             animation: 'spin 1s linear infinite',

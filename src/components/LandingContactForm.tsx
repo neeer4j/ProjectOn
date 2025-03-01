@@ -158,12 +158,12 @@ const LandingContactForm = () => {
     <Box
       sx={{
         width: '100%',
-        background: theme => isDarkMode 
+        background: isDarkMode 
           ? 'rgba(15, 23, 42, 0.6)'
           : 'rgba(255, 255, 255, 0.9)',
         backdropFilter: 'blur(10px)',
         borderRadius: 2,
-        border: theme => `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.1)'}`,
+        border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.1)'}`,
         py: { xs: 6, md: 8 },
         px: { xs: 2, sm: 4 },
       }}
@@ -186,7 +186,7 @@ const LandingContactForm = () => {
           align="center"
           sx={{ 
             mb: 4,
-            color: theme => isDarkMode 
+            color: isDarkMode 
               ? 'rgba(255, 255, 255, 0.7)'
               : 'rgba(15, 23, 42, 0.7)',
           }}

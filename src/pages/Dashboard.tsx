@@ -87,6 +87,7 @@ export default function Home() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          bgcolor: isDarkMode ? '#0F172A' : '#F8FAFC',
           '&::before': {
             content: '""',
             position: 'absolute',
@@ -107,7 +108,9 @@ export default function Home() {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: 'rgba(15, 23, 42, 0.75)',
+            background: isDarkMode
+              ? 'linear-gradient(180deg, rgba(15, 23, 42, 0.3) 0%, rgba(15, 23, 42, 0.9) 100%)'
+              : 'linear-gradient(180deg, rgba(248, 250, 252, 0.3) 0%, rgba(248, 250, 252, 0.9) 100%)',
             zIndex: 1
           },
           perspective: 1000,
@@ -202,7 +205,7 @@ export default function Home() {
       {/* Services Section */}
       <Box sx={{ 
         py: { xs: 8, md: 12 }, 
-        bgcolor: theme => isDarkMode ? '#0F172A' : '#F8FAFC',
+        bgcolor: isDarkMode ? '#0F172A' : '#F8FAFC',
         position: 'relative',
         overflow: 'hidden',
         '&::before': {
@@ -212,7 +215,7 @@ export default function Home() {
           left: 0,
           right: 0,
           bottom: 0,
-          background: theme => isDarkMode
+          background: isDarkMode
             ? 'linear-gradient(180deg, rgba(15, 23, 42, 0.3) 0%, rgba(15, 23, 42, 0.9) 100%)'
             : 'linear-gradient(180deg, rgba(248, 250, 252, 0.3) 0%, rgba(248, 250, 252, 0.9) 100%)',
           zIndex: 0
@@ -222,12 +225,12 @@ export default function Home() {
           <Box textAlign="center" mb={8} sx={{ maxWidth: '800px', mx: 'auto' }}>
             <Typography variant="h3" gutterBottom sx={{ 
               fontWeight: 700, 
-              color: theme => isDarkMode ? 'white' : '#1E293B'
+              color: isDarkMode ? 'white' : '#1E293B'
             }}>
               Our Services
             </Typography>
             <Typography variant="h6" sx={{ 
-              color: theme => isDarkMode ? 'rgba(255, 255, 255, 0.8)' : 'rgba(15, 23, 42, 0.8)',
+              color: isDarkMode ? 'rgba(255, 255, 255, 0.8)' : 'rgba(15, 23, 42, 0.8)',
               maxWidth: 600, 
               mx: 'auto' 
             }}>
@@ -252,15 +255,15 @@ export default function Home() {
                     sx={{
                       height: '100%',
                       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                      background: theme => isDarkMode 
+                      background: isDarkMode 
                         ? 'rgba(30, 41, 59, 0.5)'
                         : 'rgba(255, 255, 255, 0.9)',
                       backdropFilter: 'blur(8px)',
-                      border: theme => `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.1)'}`,
+                      border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.1)'}`,
                       willChange: 'transform',
                       '&:hover': {
                         transform: 'translateY(-8px)',
-                        background: theme => isDarkMode 
+                        background: isDarkMode 
                           ? 'rgba(30, 41, 59, 0.8)'
                           : 'rgba(255, 255, 255, 1)',
                         boxShadow: '0 12px 40px -8px rgba(0, 0, 0, 0.2)',
@@ -301,13 +304,13 @@ export default function Home() {
                       </Box>
                       <Typography variant="h5" gutterBottom sx={{ 
                         fontWeight: 600, 
-                        color: theme => isDarkMode ? 'white' : '#1E293B',
+                        color: isDarkMode ? 'white' : '#1E293B',
                         mb: 2
                       }}>
                         {service.title}
                       </Typography>
                       <Typography sx={{ 
-                        color: theme => isDarkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(15, 23, 42, 0.8)',
+                        color: isDarkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(15, 23, 42, 0.8)',
                         lineHeight: 1.7
                       }}>
                         {service.description}
@@ -327,8 +330,8 @@ export default function Home() {
         id="about"
         sx={{ 
           py: { xs: 8, md: 12 }, 
-          bgcolor: theme => isDarkMode ? '#0F172A' : '#F8FAFC',
-          borderTop: theme => `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.1)'}`,
+          bgcolor: isDarkMode ? '#0F172A' : '#F8FAFC',
+          borderTop: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.1)'}`,
           position: 'relative',
           scrollMarginTop: '80px',
         }}
@@ -337,7 +340,7 @@ export default function Home() {
           <Box textAlign="center" mb={6} sx={{ maxWidth: '900px', mx: 'auto' }}>
             <Typography variant="h3" gutterBottom sx={{ 
               fontWeight: 700, 
-              color: theme => isDarkMode ? 'white' : '#1E293B'
+              color: isDarkMode ? 'white' : '#1E293B'
             }}>
               About Us
             </Typography>
@@ -351,7 +354,7 @@ export default function Home() {
               <Typography 
                 variant="body1" 
                 sx={{ 
-                  color: theme => isDarkMode ? 'rgba(255, 255, 255, 0.8)' : 'rgba(15, 23, 42, 0.8)',
+                  color: isDarkMode ? 'rgba(255, 255, 255, 0.8)' : 'rgba(15, 23, 42, 0.8)',
                   fontSize: { xs: '1rem', md: '1.1rem' },
                   lineHeight: 1.8,
                   maxWidth: '900px',
@@ -374,8 +377,8 @@ Their mission is simple: to empower businesses and students alike with technolog
       <Box 
         sx={{ 
           py: { xs: 8, md: 12 }, 
-          bgcolor: theme => isDarkMode ? '#0F172A' : '#F8FAFC',
-          borderTop: theme => `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.1)'}`,
+          bgcolor: isDarkMode ? '#0F172A' : '#F8FAFC',
+          borderTop: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.1)'}`,
           position: 'relative',
         }}
       >
@@ -383,7 +386,7 @@ Their mission is simple: to empower businesses and students alike with technolog
           <Box textAlign="center" mb={6} sx={{ maxWidth: '900px', mx: 'auto' }}>
             <Typography variant="h3" gutterBottom sx={{ 
               fontWeight: 700, 
-              color: theme => isDarkMode ? 'white' : '#1E293B'
+              color: isDarkMode ? 'white' : '#1E293B'
             }}>
               What We Offer
             </Typography>
@@ -397,7 +400,7 @@ Their mission is simple: to empower businesses and students alike with technolog
               <Typography 
                 variant="body1" 
                 sx={{ 
-                  color: theme => isDarkMode ? 'rgba(255, 255, 255, 0.8)' : 'rgba(15, 23, 42, 0.8)',
+                  color: isDarkMode ? 'rgba(255, 255, 255, 0.8)' : 'rgba(15, 23, 42, 0.8)',
                   fontSize: '1.1rem',
                   lineHeight: 1.8,
                   maxWidth: '900px',
@@ -415,12 +418,12 @@ Their mission is simple: to empower businesses and students alike with technolog
                 mx: 'auto',
                 px: { xs: 2, md: 4 },
                 py: { xs: 3, md: 4 },
-                background: theme => isDarkMode 
+                background: isDarkMode 
                   ? 'rgba(30, 41, 59, 0.5)'
                   : 'rgba(255, 255, 255, 0.9)',
                 backdropFilter: 'blur(8px)',
                 borderRadius: 4,
-                border: theme => `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.1)'}`,
+                border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.1)'}`,
               }}>
                 <Stack spacing={2} sx={{ maxWidth: '600px', mx: 'auto' }}>
                   {['Custom Web Applications',
@@ -431,7 +434,7 @@ Their mission is simple: to empower businesses and students alike with technolog
                     <Typography 
                       key={index}
                       sx={{ 
-                        color: theme => isDarkMode ? 'rgba(255, 255, 255, 0.9)' : 'rgba(15, 23, 42, 0.9)',
+                        color: isDarkMode ? 'rgba(255, 255, 255, 0.9)' : 'rgba(15, 23, 42, 0.9)',
                         display: 'flex',
                         alignItems: 'center',
                         gap: 1,
@@ -448,7 +451,7 @@ Their mission is simple: to empower businesses and students alike with technolog
               <Typography 
                 variant="h6" 
                 sx={{ 
-                  color: theme => isDarkMode ? 'white' : '#1E293B',
+                  color: isDarkMode ? 'white' : '#1E293B',
                   textAlign: 'center',
                   mt: 6,
                   fontWeight: 500
@@ -467,7 +470,7 @@ Their mission is simple: to empower businesses and students alike with technolog
         id="contact"
         sx={{
           py: { xs: 8, md: 12 },
-          background: theme => isDarkMode ? '#0F172A' : '#F8FAFC',
+          background: isDarkMode ? '#0F172A' : '#F8FAFC',
           position: 'relative',
           overflow: 'hidden',
           scrollMarginTop: '80px',
@@ -478,7 +481,7 @@ Their mission is simple: to empower businesses and students alike with technolog
             left: 0,
             right: 0,
             height: '1px',
-            background: theme => `linear-gradient(90deg, transparent, ${
+            background: `linear-gradient(90deg, transparent, ${
               isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(15,23,42,0.1)'
             }, transparent)`,
           },
@@ -543,12 +546,12 @@ Their mission is simple: to empower businesses and students alike with technolog
                           p: { xs: 3, md: 4 }, 
                           textAlign: 'center',
                           height: '100%',
-                          background: theme => isDarkMode 
+                          background: isDarkMode 
                             ? 'rgba(30, 41, 59, 0.5)'
                             : 'rgba(255, 255, 255, 0.9)',
                           backdropFilter: 'blur(8px)',
                           borderRadius: 2,
-                          border: theme => `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.1)'}`,
+                          border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.1)'}`,
                           transition: 'transform 0.3s ease-in-out',
                           '&:hover': {
                             transform: 'translateY(-4px)',
@@ -556,7 +559,7 @@ Their mission is simple: to empower businesses and students alike with technolog
                         }}>
                           {item.icon}
                           <Typography variant="h6" sx={{ 
-                            color: theme => isDarkMode ? 'white' : '#1E293B',
+                            color: isDarkMode ? 'white' : '#1E293B',
                             mb: 1 
                           }}>
                             {item.title}
@@ -565,7 +568,7 @@ Their mission is simple: to empower businesses and students alike with technolog
                             <Typography 
                               key={i} 
                               sx={{ 
-                                color: theme => isDarkMode 
+                                color: isDarkMode 
                                   ? 'rgba(255, 255, 255, 0.7)' 
                                   : 'rgba(15, 23, 42, 0.8)',
                                 mt: i > 0 ? 1 : 0

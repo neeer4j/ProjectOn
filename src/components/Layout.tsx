@@ -240,10 +240,9 @@ export default function Layout({ children }: LayoutProps) {
           elevation={0}
           sx={{ 
             backdropFilter: 'blur(8px)',
-            backgroundColor: theme => 
-              isDarkMode 
-                ? 'rgba(15, 23, 42, 0.85)'
-                : 'rgba(248, 250, 252, 0.85)',
+            backgroundColor: isDarkMode 
+              ? 'rgba(15, 23, 42, 0.85)'
+              : 'rgba(248, 250, 252, 0.85)',
             width: '100%'
           }}
         >
@@ -271,7 +270,7 @@ export default function Layout({ children }: LayoutProps) {
               <Button
                 onClick={handleAboutClick}
                 sx={{
-                  color: theme => isDarkMode ? 'white' : 'text.primary',
+                  color: isDarkMode ? 'white' : 'text.primary',
                   fontSize: '1rem',
                   '&:hover': {
                     color: '#6366F1'
@@ -283,7 +282,7 @@ export default function Layout({ children }: LayoutProps) {
               </Button>
               <Button
                 sx={{
-                  color: theme => isDarkMode ? 'white' : 'text.primary',
+                  color: isDarkMode ? 'white' : 'text.primary',
                   fontSize: '1rem',
                   '&:hover': {
                     color: '#6366F1'
@@ -335,10 +334,9 @@ export default function Layout({ children }: LayoutProps) {
           elevation={0}
           sx={{ 
             backdropFilter: 'blur(8px)',
-            backgroundColor: theme => 
-              isDarkMode 
-                ? 'rgba(15, 23, 42, 0.85)'
-                : 'rgba(248, 250, 252, 0.85)',
+            backgroundColor: isDarkMode 
+              ? 'rgba(15, 23, 42, 0.85)'
+              : 'rgba(248, 250, 252, 0.85)',
             width: '100%'
           }}
         >
@@ -366,7 +364,7 @@ export default function Layout({ children }: LayoutProps) {
               <Button
                 onClick={handleAboutClick}
                 sx={{
-                  color: theme => isDarkMode ? 'white' : 'text.primary',
+                  color: isDarkMode ? 'white' : 'text.primary',
                   fontSize: '1rem',
                   '&:hover': {
                     color: '#6366F1'
@@ -378,7 +376,7 @@ export default function Layout({ children }: LayoutProps) {
               </Button>
               <Button
                 sx={{
-                  color: theme => isDarkMode ? 'white' : 'text.primary',
+                  color: isDarkMode ? 'white' : 'text.primary',
                   fontSize: '1rem',
                   '&:hover': {
                     color: '#6366F1'
@@ -395,7 +393,11 @@ export default function Layout({ children }: LayoutProps) {
               color="inherit"
               edge="end"
               onClick={() => setMobileOpen(!mobileOpen)}
-              sx={{ ml: 2, display: { md: 'none' } }}
+              sx={{ 
+                ml: 2, 
+                display: { md: 'none' },
+                color: isDarkMode ? 'white' : 'text.primary'
+              }}
             >
               <MenuIcon />
             </IconButton>
@@ -408,7 +410,13 @@ export default function Layout({ children }: LayoutProps) {
           ModalProps={{ keepMounted: true }}
           sx={{
             display: { xs: 'block', md: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            '& .MuiDrawer-paper': { 
+              boxSizing: 'border-box', 
+              width: drawerWidth,
+              backgroundColor: isDarkMode 
+                ? 'rgba(15, 23, 42, 0.95)'
+                : 'rgba(248, 250, 252, 0.95)'
+            }
           }}
         >
           {drawer}
@@ -420,6 +428,7 @@ export default function Layout({ children }: LayoutProps) {
             p: { xs: 2, sm: 4, md: 6 },
             width: '100%',
             pt: '80px',
+            backgroundColor: isDarkMode ? '#0F172A' : '#F8FAFC'
           }}
         >
           {children}
@@ -434,8 +443,10 @@ export default function Layout({ children }: LayoutProps) {
       <AppBar 
         position="fixed" 
         sx={{ 
-          zIndex: (theme) => theme.zIndex.drawer + 1,
-          background: 'rgba(15, 23, 42, 0.95)', // Darker blue-gray matching theme
+          zIndex: theme => theme.zIndex.drawer + 1,
+          backgroundColor: isDarkMode 
+            ? 'rgba(15, 23, 42, 0.95)'
+            : 'rgba(248, 250, 252, 0.95)',
           width: '100%',
           height: 80
         }}
@@ -445,7 +456,11 @@ export default function Layout({ children }: LayoutProps) {
             color="inherit"
             edge="start"
             onClick={() => setMobileOpen(!mobileOpen)}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            sx={{ 
+              mr: 2, 
+              display: { sm: 'none' },
+              color: isDarkMode ? 'white' : 'text.primary'
+            }}
           >
             <MenuIcon />
           </IconButton>
@@ -472,7 +487,13 @@ export default function Layout({ children }: LayoutProps) {
           ModalProps={{ keepMounted: true }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            '& .MuiDrawer-paper': { 
+              boxSizing: 'border-box', 
+              width: drawerWidth,
+              backgroundColor: isDarkMode 
+                ? 'rgba(15, 23, 42, 0.95)'
+                : 'rgba(248, 250, 252, 0.95)'
+            }
           }}
         >
           {drawer}
@@ -481,7 +502,13 @@ export default function Layout({ children }: LayoutProps) {
           variant="permanent"
           sx={{
             display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            '& .MuiDrawer-paper': { 
+              boxSizing: 'border-box', 
+              width: drawerWidth,
+              backgroundColor: isDarkMode 
+                ? 'rgba(15, 23, 42, 0.95)'
+                : 'rgba(248, 250, 252, 0.95)'
+            }
           }}
           open
         >
@@ -494,7 +521,8 @@ export default function Layout({ children }: LayoutProps) {
           flexGrow: 1,
           p: { xs: 2, sm: 4, md: 6 },
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          marginTop: '80px', // Updated to match the larger navbar
+          marginTop: '80px',
+          backgroundColor: isDarkMode ? '#0F172A' : '#F8FAFC'
         }}
       >
         {children}

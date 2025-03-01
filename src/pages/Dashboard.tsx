@@ -20,10 +20,17 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useRef, useEffect } from 'react';
 
-const GradientTypography = styled(Typography)({
+const GradientText = styled('h1')({
   background: 'linear-gradient(90deg, #6366F1, #EC4899)',
   WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent'
+  WebkitTextFillColor: 'transparent',
+  fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+  fontWeight: 800,
+  position: 'relative',
+  display: 'block',
+  margin: 0,
+  transform: 'translateZ(0)',
+  backfaceVisibility: 'hidden'
 });
 
 const services = [
@@ -97,9 +104,11 @@ export default function Home() {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: 'rgba(15, 23, 42, 0.75)', // Dark overlay to ensure text readability
+            backgroundColor: 'rgba(15, 23, 42, 0.75)',
             zIndex: 1
-          }
+          },
+          perspective: 1000,
+          perspectiveOrigin: 'center center',
         }}
       >
         <Container 
@@ -107,7 +116,11 @@ export default function Home() {
           sx={{ 
             px: { xs: 2, sm: 4, md: 6 },
             position: 'relative',
-            zIndex: 2 // Place content above the background and overlay
+            zIndex: 2,
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden',
+            WebkitFontSmoothing: 'antialiased',
+            MozOsxFontSmoothing: 'grayscale'
           }}
         >
           <Grid container spacing={4} alignItems="center" justifyContent="center">
@@ -120,20 +133,30 @@ export default function Home() {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  width: '100%'
+                  width: '100%',
+                  padding: '3rem 0'
                 }}
               >
-                <GradientTypography variant="h1" sx={{ 
-                  fontWeight: 800, 
-                  mb: { xs: 2, md: 4 },
-                  fontSize: { xs: '3rem', sm: '7rem', md: '11rem' },
-                  lineHeight: 1,
-                  textAlign: 'center',
-                  letterSpacing: '-0.02em',
-                  width: '100%'
+                <Box sx={{ 
+                  overflow: 'visible',
+                  position: 'relative',
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  minHeight: '240px'
                 }}>
-                  ProjectOn.
-                </GradientTypography>
+                  <GradientText
+                    sx={{ 
+                      fontSize: { xs: '3rem', sm: '7rem', md: '8rem' },
+                      textAlign: 'center',
+                      letterSpacing: '-0.02em',
+                      pb: 2
+                    }}
+                  >
+                    ProjectOn
+                  </GradientText>
+                </Box>
                 <Typography variant="h4" sx={{ 
                   mb: { xs: 4, md: 6 }, 
                   lineHeight: 1.4,

@@ -43,17 +43,32 @@ export default function Projects() {
   ];
 
   return (
-    <Container maxWidth={false} sx={{ px: { xs: 2, sm: 4, md: 6 } }}>
-      <Box sx={{ py: 6 }}>
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Typography variant="h4" sx={{ fontWeight: 700, mb: 4, color: '#1E293B' }}>
+    <Box sx={{ minHeight: '100vh', bgcolor: '#0F172A' }}>
+      <Container maxWidth={false} sx={{ py: { xs: 4, md: 8 } }}>
+        <Box textAlign="center" mb={8}>
+          <Typography 
+            variant="h2" 
+            gutterBottom 
+            sx={{ 
+              color: 'white',
+              fontWeight: 700,
+              fontSize: { xs: '2.5rem', md: '3.5rem' }
+            }}
+          >
             Featured Projects
           </Typography>
-        </motion.div>
+          <Typography 
+            variant="h5" 
+            sx={{ 
+              color: 'rgba(255, 255, 255, 0.8)',
+              maxWidth: '800px',
+              mx: 'auto',
+              mb: 6
+            }}
+          >
+            Discover our latest work and innovative solutions
+          </Typography>
+        </Box>
 
         <Grid container spacing={4}>
           {projects.map((project, index) => (
@@ -169,7 +184,7 @@ export default function Projects() {
             </Grid>
           ))}
         </Grid>
-      </Box>
-    </Container>
+      </Container>
+    </Box>
   );
 }

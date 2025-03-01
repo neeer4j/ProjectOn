@@ -10,7 +10,9 @@ import {
   Toolbar,
   Button,
   Stack,
+  Typography,
 } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import {
   Menu as MenuIcon,
   Home as HomeIcon,
@@ -21,6 +23,13 @@ import {
 import Footer from './Footer';
 
 const drawerWidth = 280;
+
+const GradientTypography = styled(Typography)({
+  background: 'linear-gradient(90deg, #6366F1, #EC4899)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  cursor: 'pointer'
+});
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -34,33 +43,54 @@ export default function Layout({ children }: LayoutProps) {
   const isProjectsPage = location.pathname === '/projects';
 
   const handleAboutClick = () => {
-    const aboutSection = document.getElementById('about');
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: 'smooth' });
+    if (!isHomePage) {
+      navigate('/#about');
+      // Allow time for navigation before scrolling
+      setTimeout(() => {
+        const aboutSection = document.getElementById('about');
+        if (aboutSection) {
+          aboutSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const aboutSection = document.getElementById('about');
+      if (aboutSection) {
+        aboutSection.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
   const handleContactClick = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+    if (!isHomePage) {
+      navigate('/#contact');
+      // Allow time for navigation before scrolling
+      setTimeout(() => {
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
   const drawer = (
     <Box>
       <Toolbar sx={{ height: 80 }}>
-        <Box 
-          component="img" 
-          src="/logo.svg" 
-          alt="ProjectOn Logo" 
+        <GradientTypography 
+          variant="h4" 
           sx={{ 
-            height: 40,
-            width: 'auto',
-            cursor: 'pointer' 
+            fontWeight: 800,
+            letterSpacing: '-0.02em',
           }}
           onClick={() => navigate('/')}
-        />
+        >
+          ProjectOn
+        </GradientTypography>
       </Toolbar>
       <List>
         <Button
@@ -173,18 +203,17 @@ export default function Layout({ children }: LayoutProps) {
           }}
         >
           <Toolbar sx={{ height: 80, maxWidth: '100%', px: { xs: 2, sm: 4, md: 6 } }}>
-            <Box 
-              component="img" 
-              src="/logo.svg" 
-              alt="ProjectOn Logo" 
+            <GradientTypography 
+              variant="h4" 
               sx={{ 
-                height: 40,
-                width: 'auto',
-                mr: 2,
-                cursor: 'pointer'
+                fontWeight: 800,
+                letterSpacing: '-0.02em',
+                mr: 2
               }}
               onClick={() => navigate('/')}
-            />
+            >
+              ProjectOn
+            </GradientTypography>
             <Box sx={{ flexGrow: 1 }} />
             <Stack 
               direction="row" 
@@ -252,18 +281,17 @@ export default function Layout({ children }: LayoutProps) {
           }}
         >
           <Toolbar sx={{ height: 80, maxWidth: '100%', px: { xs: 2, sm: 4, md: 6 } }}>
-            <Box 
-              component="img" 
-              src="/logo.svg" 
-              alt="ProjectOn Logo" 
+            <GradientTypography 
+              variant="h4" 
               sx={{ 
-                height: 40,
-                width: 'auto',
-                mr: 2,
-                cursor: 'pointer'
+                fontWeight: 800,
+                letterSpacing: '-0.02em',
+                mr: 2
               }}
               onClick={() => navigate('/')}
-            />
+            >
+              ProjectOn
+            </GradientTypography>
             <Box sx={{ flexGrow: 1 }} />
             <Stack 
               direction="row" 
@@ -345,17 +373,16 @@ export default function Layout({ children }: LayoutProps) {
           >
             <MenuIcon />
           </IconButton>
-          <Box 
-            component="img" 
-            src="/logo.svg" 
-            alt="ProjectOn Logo" 
+          <GradientTypography 
+            variant="h4" 
             sx={{ 
-              height: 40,
-              width: 'auto',
-              cursor: 'pointer'
+              fontWeight: 800,
+              letterSpacing: '-0.02em'
             }}
             onClick={() => navigate('/')}
-          />
+          >
+            ProjectOn
+          </GradientTypography>
         </Toolbar>
       </AppBar>
       <Box

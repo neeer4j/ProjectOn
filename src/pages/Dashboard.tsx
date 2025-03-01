@@ -7,7 +7,6 @@ import {
   Grid,
   Card,
   CardContent,
-  IconButton,
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/material/styles';
@@ -17,10 +16,6 @@ import {
   Speed, 
   Email as EmailIcon,
   Phone as PhoneIcon,
-  LocationOn as LocationIcon,
-  LinkedIn,
-  GitHub,
-  Twitter
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useRef, useEffect } from 'react';
@@ -55,12 +50,21 @@ export default function Home() {
   const contactRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    // Check if URL has #about or #contact hash
-    if (window.location.hash === '#about') {
-      aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
-    } else if (window.location.hash === '#contact') {
-      contactRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }
+    // Handle initial load and subsequent hash changes
+    const handleHashScroll = () => {
+      if (window.location.hash === '#about') {
+        aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
+      } else if (window.location.hash === '#contact') {
+        contactRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    // Handle the initial hash on mount
+    handleHashScroll();
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashScroll);
+    return () => window.removeEventListener('hashchange', handleHashScroll);
   }, []);
 
   return (
@@ -462,116 +466,60 @@ export default function Home() {
                 Get in touch with us for any questions about our services or to discuss your next project.
               </Typography>
               
-              <Grid container spacing={4} sx={{ maxWidth: '900px', mx: 'auto' }}>
-                <Grid item xs={12} md={4}>
+              <Grid container spacing={4} sx={{ maxWidth: '800px', mx: 'auto' }}>
+                <Grid item xs={12} sm={6}>
                   <Box sx={{ 
-                    p: 3, 
+                    p: 4, 
                     textAlign: 'center',
                     height: '100%',
                     background: 'rgba(30, 41, 59, 0.5)',
                     backdropFilter: 'blur(8px)',
                     borderRadius: 2,
                     border: '1px solid rgba(255, 255, 255, 0.1)',
+                    transition: 'transform 0.3s ease-in-out',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                    }
                   }}>
                     <EmailIcon sx={{ fontSize: 40, color: '#6366F1', mb: 2 }} />
                     <Typography variant="h6" sx={{ color: 'white', mb: 1 }}>
                       Email Us
                     </Typography>
                     <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                      info@projecton.com
+                      connect.projecton@gmail.com
                     </Typography>
-                    <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                      support@projecton.com
+                    <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)', mt: 1 }}>
+                      Let's discuss your next project!
                     </Typography>
                   </Box>
                 </Grid>
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} sm={6}>
                   <Box sx={{ 
-                    p: 3, 
+                    p: 4, 
                     textAlign: 'center',
                     height: '100%',
                     background: 'rgba(30, 41, 59, 0.5)',
                     backdropFilter: 'blur(8px)',
                     borderRadius: 2,
                     border: '1px solid rgba(255, 255, 255, 0.1)',
+                    transition: 'transform 0.3s ease-in-out',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                    }
                   }}>
                     <PhoneIcon sx={{ fontSize: 40, color: '#6366F1', mb: 2 }} />
                     <Typography variant="h6" sx={{ color: 'white', mb: 1 }}>
                       Call Us
                     </Typography>
                     <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                      +1 (555) 123-4567
+                      +91 9995772632
                     </Typography>
                     <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                       Mon - Fri, 9:00 - 18:00
                     </Typography>
                   </Box>
                 </Grid>
-                <Grid item xs={12} md={4}>
-                  <Box sx={{ 
-                    p: 3, 
-                    textAlign: 'center',
-                    height: '100%',
-                    background: 'rgba(30, 41, 59, 0.5)',
-                    backdropFilter: 'blur(8px)',
-                    borderRadius: 2,
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                  }}>
-                    <LocationIcon sx={{ fontSize: 40, color: '#6366F1', mb: 2 }} />
-                    <Typography variant="h6" sx={{ color: 'white', mb: 1 }}>
-                      Visit Us
-                    </Typography>
-                    <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                      123 Innovation Street
-                    </Typography>
-                    <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                      Tech Valley, CA 94043
-                    </Typography>
-                  </Box>
-                </Grid>
               </Grid>
-
-              <Box sx={{ mt: 6, textAlign: 'center' }}>
-                <Typography variant="h6" sx={{ color: 'white', mb: 2 }}>
-                  Connect With Us
-                </Typography>
-                <Stack 
-                  direction="row" 
-                  spacing={2} 
-                  justifyContent="center"
-                >
-                  <IconButton sx={{ 
-                    color: 'rgba(255, 255, 255, 0.7)',
-                    '&:hover': { 
-                      color: '#6366F1',
-                      transform: 'translateY(-2px)'
-                    },
-                    transition: 'all 0.2s'
-                  }}>
-                    <LinkedIn />
-                  </IconButton>
-                  <IconButton sx={{ 
-                    color: 'rgba(255, 255, 255, 0.7)',
-                    '&:hover': { 
-                      color: '#6366F1',
-                      transform: 'translateY(-2px)'
-                    },
-                    transition: 'all 0.2s'
-                  }}>
-                    <GitHub />
-                  </IconButton>
-                  <IconButton sx={{ 
-                    color: 'rgba(255, 255, 255, 0.7)',
-                    '&:hover': { 
-                      color: '#6366F1',
-                      transform: 'translateY(-2px)'
-                    },
-                    transition: 'all 0.2s'
-                  }}>
-                    <Twitter />
-                  </IconButton>
-                </Stack>
-              </Box>
             </motion.div>
           </Box>
         </Container>

@@ -19,6 +19,7 @@ import {
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useRef, useEffect } from 'react';
+import LandingContactForm from '../components/LandingContactForm';
 
 const GradientText = styled('h1')({
   background: 'linear-gradient(90deg, #6366F1, #EC4899)',
@@ -340,7 +341,11 @@ export default function Home() {
                   px: { xs: 2, md: 4 }
                 }}
               >
-                Four passionate Computer Science graduates came together with a shared vision—to build innovative software solutions that push the boundaries of technology. Driven by their love for coding, problem-solving, and cutting-edge advancements, they founded ProjectOn, a platform dedicated to creating web apps, mobile applications, and scalable software for businesses and individuals. With expertise in development, UI/UX design, and system architecture, they strive to turn ideas into reality, ensuring high-quality, user-friendly, and future-ready solutions. Their mission is simple: to empower businesses with technology and make a lasting impact in the digital world.
+               Four passionate Computer Science graduates came together with a shared vision—to build innovative, high-quality software solutions that push the boundaries of technology. Driven by their love for coding, problem-solving, and cutting-edge advancements, they founded ProjectOn, a platform dedicated to developing web apps, mobile applications, and scalable software for businesses, individuals, and aspiring developers.
+
+With expertise in software development, UI/UX design, and system architecture, they strive to turn ideas into reality, ensuring that every project they build is efficient, user-friendly, and future-ready. Beyond serving businesses, ProjectOn is also committed to helping students and young innovators bring their ideas to life. Whether it's a final-year project, a startup prototype, or an academic software solution, they provide professional guidance, structured development processes, and industry-standard technology to ensure top-tier results.
+
+Their mission is simple: to empower businesses and students alike with technology, bridging the gap between innovation and execution while making a lasting impact in the digital world.
               </Typography>
             </motion.div>
           </Box>
@@ -474,116 +479,120 @@ export default function Home() {
         </Container>
       </Box>
 
-      {/* Contact Us Section */}
-      <Box 
+      {/* Contact Section */}
+      <Box
         ref={contactRef}
         id="contact"
-        sx={{ 
-          py: { xs: 8, md: 12 }, 
-          bgcolor: '#0F172A',
-          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+        sx={{
+          py: { xs: 8, md: 12 },
+          background: '#0F172A',
           position: 'relative',
+          overflow: 'hidden',
           scrollMarginTop: '80px',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: '1px',
+            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)',
+          },
         }}
       >
         <Container maxWidth={false} sx={{ px: { xs: 2, sm: 4, md: 6 } }}>
-          <Box textAlign="center" mb={6} sx={{ maxWidth: '900px', mx: 'auto' }}>
-            <Typography variant="h3" gutterBottom sx={{ fontWeight: 700, color: 'white' }}>
-              Contact Us
-            </Typography>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <Typography 
-                variant="body1" 
-                sx={{ 
-                  color: 'rgba(255, 255, 255, 0.8)',
-                  fontSize: '1.1rem',
-                  lineHeight: 1.8,
-                  maxWidth: '700px',
-                  mx: 'auto',
-                  mb: 6
-                }}
+          <Grid container spacing={4}>
+            <Grid item xs={12}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true, margin: "-50px" }}
               >
-                Get in touch with us for any questions about our services or to discuss your next project.
-              </Typography>
-              
-              <Box sx={{ 
-                display: 'flex', 
-                justifyContent: 'center',
-                width: '100%',
-                maxWidth: '1000px',
-                mx: 'auto'
-              }}>
-                <Grid 
-                  container 
-                  spacing={{ xs: 2, md: 4 }} 
-                  sx={{ 
-                    width: 'auto',
-                    margin: { xs: '-16px', md: '0 auto' },
-                    justifyContent: 'center'
-                  }}
-                >
-                  <Grid item xs={12} sm={6} md={5}>
-                    <Box sx={{ 
-                      p: { xs: 3, md: 4 }, 
-                      textAlign: 'center',
-                      height: '100%',
-                      background: 'rgba(30, 41, 59, 0.5)',
-                      backdropFilter: 'blur(8px)',
-                      borderRadius: 2,
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      transition: 'transform 0.3s ease-in-out',
-                      '&:hover': {
-                        transform: 'translateY(-4px)',
-                      }
-                    }}>
-                      <EmailIcon sx={{ fontSize: 40, color: '#6366F1', mb: 2 }} />
-                      <Typography variant="h6" sx={{ color: 'white', mb: 1 }}>
-                        Email Us
-                      </Typography>
-                      <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                        connect.projecton@gmail.com
-                      </Typography>
-                      <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)', mt: 1 }}>
-                        Let's discuss your next project!
-                      </Typography>
-                    </Box>
+                <LandingContactForm />
+              </motion.div>
+            </Grid>
+            <Grid item xs={12}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true, margin: "-50px" }}
+              >
+                <Box sx={{ 
+                  display: 'flex', 
+                  justifyContent: 'center',
+                  width: '100%',
+                  maxWidth: '1000px',
+                  mx: 'auto',
+                  mt: 4
+                }}>
+                  <Grid 
+                    container 
+                    spacing={{ xs: 2, md: 4 }} 
+                    sx={{ 
+                      width: 'auto',
+                      margin: { xs: '-16px', md: '0 auto' },
+                      justifyContent: 'center'
+                    }}
+                  >
+                    <Grid item xs={12} sm={6} md={5}>
+                      <Box sx={{ 
+                        p: { xs: 3, md: 4 }, 
+                        textAlign: 'center',
+                        height: '100%',
+                        background: 'rgba(30, 41, 59, 0.5)',
+                        backdropFilter: 'blur(8px)',
+                        borderRadius: 2,
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        transition: 'transform 0.3s ease-in-out',
+                        '&:hover': {
+                          transform: 'translateY(-4px)',
+                        }
+                      }}>
+                        <EmailIcon sx={{ fontSize: 40, color: '#6366F1', mb: 2 }} />
+                        <Typography variant="h6" sx={{ color: 'white', mb: 1 }}>
+                          Email Us
+                        </Typography>
+                        <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                          connect.projecton@gmail.com
+                        </Typography>
+                        <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)', mt: 1 }}>
+                          Let's discuss your next project!
+                        </Typography>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={5}>
+                      <Box sx={{ 
+                        p: { xs: 3, md: 4 }, 
+                        textAlign: 'center',
+                        height: '100%',
+                        background: 'rgba(30, 41, 59, 0.5)',
+                        backdropFilter: 'blur(8px)',
+                        borderRadius: 2,
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        transition: 'transform 0.3s ease-in-out',
+                        '&:hover': {
+                          transform: 'translateY(-4px)',
+                        }
+                      }}>
+                        <PhoneIcon sx={{ fontSize: 40, color: '#6366F1', mb: 2 }} />
+                        <Typography variant="h6" sx={{ color: 'white', mb: 1 }}>
+                          Call Us
+                        </Typography>
+                        <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                          +91 9995772632
+                        </Typography>
+                        <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                          Mon - Fri, 9:00 - 18:00
+                        </Typography>
+                      </Box>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={12} sm={6} md={5}>
-                    <Box sx={{ 
-                      p: { xs: 3, md: 4 }, 
-                      textAlign: 'center',
-                      height: '100%',
-                      background: 'rgba(30, 41, 59, 0.5)',
-                      backdropFilter: 'blur(8px)',
-                      borderRadius: 2,
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      transition: 'transform 0.3s ease-in-out',
-                      '&:hover': {
-                        transform: 'translateY(-4px)',
-                      }
-                    }}>
-                      <PhoneIcon sx={{ fontSize: 40, color: '#6366F1', mb: 2 }} />
-                      <Typography variant="h6" sx={{ color: 'white', mb: 1 }}>
-                        Call Us
-                      </Typography>
-                      <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                        +91 9995772632
-                      </Typography>
-                      <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                        Mon - Fri, 9:00 - 18:00
-                      </Typography>
-                    </Box>
-                  </Grid>
-                </Grid>
-              </Box>
-            </motion.div>
-          </Box>
+                </Box>
+              </motion.div>
+            </Grid>
+          </Grid>
         </Container>
       </Box>
     </Box>

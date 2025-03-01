@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
+import Loading from './components/Loading';
 import Home from './pages/Dashboard';
 import Projects from './pages/Projects';
 
@@ -134,17 +136,41 @@ const theme = createTheme({
 });
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time (you can remove this setTimeout if you have actual data loading)
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    // Add event listener for page reload
+    const handleBeforeUnload = () => {
+      setIsLoading(true);
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/projects" element={<Projects />} />
-          </Routes>
-        </Layout>
-      </BrowserRouter>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <BrowserRouter>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/projects" element={<Projects />} />
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+      )}
     </ThemeProvider>
   );
 }

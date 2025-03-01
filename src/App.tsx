@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
-import { ThemeProvider, CssBaseline } from '@mui/material';
+import { ThemeProvider as MuiThemeProvider, CssBaseline } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Loading from './components/Loading';
 import Home from './pages/Dashboard';
 import Projects from './pages/Projects';
+import { ThemeProvider as CustomThemeProvider, useTheme } from './context/ThemeContext';
 
-const theme = createTheme({
+const createAppTheme = (isDarkMode: boolean) => createTheme({
   palette: {
-    mode: 'dark',
+    mode: isDarkMode ? 'dark' : 'light',
     primary: {
       main: '#6366F1', // Indigo
       light: '#818CF8',
@@ -40,13 +41,19 @@ const theme = createTheme({
       light: '#F87171',
       dark: '#DC2626',
     },
-    background: {
+    background: isDarkMode ? {
       default: '#0F172A', // Darker blue-gray that matches the image
       paper: 'rgba(15, 23, 42, 0.8)',
+    } : {
+      default: '#F8FAFC',
+      paper: '#FFFFFF',
     },
-    text: {
+    text: isDarkMode ? {
       primary: 'rgba(255, 255, 255, 0.95)',
       secondary: 'rgba(255, 255, 255, 0.7)',
+    } : {
+      primary: 'rgba(15, 23, 42, 0.95)',
+      secondary: 'rgba(15, 23, 42, 0.7)',
     },
     grey: {
       50: '#F8FAFC',
@@ -135,8 +142,10 @@ const theme = createTheme({
   },
 });
 
-function App() {
+function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
+  const { isDarkMode } = useTheme();
+  const theme = createAppTheme(isDarkMode);
 
   useEffect(() => {
     // Simulate loading time (you can remove this setTimeout if you have actual data loading)
@@ -157,7 +166,7 @@ function App() {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
+    <MuiThemeProvider theme={theme}>
       <CssBaseline />
       {isLoading ? (
         <Loading />
@@ -171,7 +180,15 @@ function App() {
           </Layout>
         </BrowserRouter>
       )}
-    </ThemeProvider>
+    </MuiThemeProvider>
+  );
+}
+
+function App() {
+  return (
+    <CustomThemeProvider>
+      <AppContent />
+    </CustomThemeProvider>
   );
 }
 

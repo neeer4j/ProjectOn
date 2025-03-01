@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Launch as LaunchIcon } from '@mui/icons-material';
+import { useTheme } from '../context/ThemeContext';
 
 interface Project {
   title: string;
@@ -23,6 +24,8 @@ interface Project {
 }
 
 export default function Projects() {
+  const { isDarkMode } = useTheme();
+  
   const projects: Project[] = [
     {
       title: "MindEase",
@@ -43,14 +46,18 @@ export default function Projects() {
   ];
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: '#0F172A' }}>
+    <Box sx={{ 
+      minHeight: '100vh', 
+      bgcolor: theme => isDarkMode ? '#0F172A' : '#F8FAFC',
+      color: theme => isDarkMode ? 'white' : '#1E293B'
+    }}>
       <Container maxWidth={false} sx={{ py: { xs: 4, md: 8 } }}>
         <Box textAlign="center" mb={8}>
           <Typography 
             variant="h2" 
             gutterBottom 
             sx={{ 
-              color: 'white',
+              color: theme => isDarkMode ? 'white' : '#1E293B',
               fontWeight: 700,
               fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' },
               px: { xs: 2, md: 0 }
@@ -61,7 +68,7 @@ export default function Projects() {
           <Typography 
             variant="h5" 
             sx={{ 
-              color: 'rgba(255, 255, 255, 0.8)',
+              color: theme => isDarkMode ? 'rgba(255, 255, 255, 0.8)' : 'rgba(15, 23, 42, 0.8)',
               maxWidth: '800px',
               mx: 'auto',
               mb: 6,
@@ -86,10 +93,15 @@ export default function Projects() {
                     maxWidth: '100%',
                     borderRadius: 4,
                     overflow: 'hidden',
-                    boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                    boxShadow: theme => isDarkMode 
+                      ? '0 10px 30px rgba(0,0,0,0.2)'
+                      : '0 10px 30px rgba(0,0,0,0.1)',
                     transition: 'transform 0.3s ease-in-out',
-                    background: 'rgba(30, 41, 59, 0.5)',
+                    background: theme => isDarkMode 
+                      ? 'rgba(30, 41, 59, 0.5)'
+                      : 'rgba(255, 255, 255, 0.9)',
                     backdropFilter: 'blur(8px)',
+                    border: theme => `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.1)'}`,
                     '&:hover': {
                       transform: 'translateY(-8px)',
                       '& .project-image': {
@@ -152,7 +164,7 @@ export default function Projects() {
                       variant="body1" 
                       sx={{ 
                         mb: 3, 
-                        color: 'text.secondary', 
+                        color: theme => isDarkMode ? 'rgba(255, 255, 255, 0.8)' : 'rgba(15, 23, 42, 0.8)',
                         lineHeight: 1.7,
                         fontSize: { xs: '0.9rem', sm: '1rem' }
                       }}
@@ -175,7 +187,9 @@ export default function Projects() {
                           label={tech}
                           sx={{
                             m: 0.5,
-                            background: 'rgba(99, 102, 241, 0.1)',
+                            background: theme => isDarkMode 
+                              ? 'rgba(99, 102, 241, 0.15)'
+                              : 'rgba(99, 102, 241, 0.1)',
                             color: '#6366F1',
                             fontWeight: 500,
                             fontSize: { xs: '0.75rem', sm: '0.875rem' },
@@ -193,7 +207,9 @@ export default function Projects() {
                       spacing={2}
                       sx={{
                         borderTop: '1px solid',
-                        borderColor: 'divider',
+                        borderColor: theme => isDarkMode 
+                          ? 'rgba(255, 255, 255, 0.1)'
+                          : 'rgba(15, 23, 42, 0.1)',
                         pt: { xs: 2, sm: 3 }
                       }}
                     >

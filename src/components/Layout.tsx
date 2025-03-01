@@ -11,6 +11,7 @@ import {
   Button,
   Stack,
   Typography,
+  Tooltip,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import {
@@ -19,7 +20,10 @@ import {
   Code as CodeIcon,
   Info as InfoIcon,
   ContactSupport as ContactIcon,
+  DarkMode as DarkModeIcon,
+  LightMode as LightModeIcon,
 } from '@mui/icons-material';
+import { useTheme } from '../context/ThemeContext';
 import Footer from './Footer';
 
 const drawerWidth = 280;
@@ -39,6 +43,7 @@ export default function Layout({ children }: LayoutProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { isDarkMode, toggleTheme } = useTheme();
   const isHomePage = location.pathname === '/';
   const isProjectsPage = location.pathname === '/projects';
 
@@ -209,6 +214,23 @@ export default function Layout({ children }: LayoutProps) {
     </Box>
   );
 
+  const ThemeToggleButton = () => (
+    <Tooltip title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}>
+      <IconButton
+        onClick={toggleTheme}
+        sx={{
+          ml: 2,
+          color: 'inherit',
+          '&:hover': {
+            color: theme => theme.palette.primary.main,
+          },
+        }}
+      >
+        {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
+      </IconButton>
+    </Tooltip>
+  );
+
   if (isHomePage) {
     return (
       <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -218,7 +240,10 @@ export default function Layout({ children }: LayoutProps) {
           elevation={0}
           sx={{ 
             backdropFilter: 'blur(8px)',
-            backgroundColor: 'rgba(15, 23, 42, 0.85)', // Darker blue-gray matching theme
+            backgroundColor: theme => 
+              isDarkMode 
+                ? 'rgba(15, 23, 42, 0.85)'
+                : 'rgba(248, 250, 252, 0.85)',
             width: '100%'
           }}
         >
@@ -239,13 +264,14 @@ export default function Layout({ children }: LayoutProps) {
               direction="row" 
               spacing={2}
               sx={{
-                display: { xs: 'none', md: 'flex' }
+                display: { xs: 'none', md: 'flex' },
+                alignItems: 'center',
               }}
             >
               <Button
                 onClick={handleAboutClick}
                 sx={{
-                  color: 'white',
+                  color: theme => isDarkMode ? 'white' : 'text.primary',
                   fontSize: '1rem',
                   '&:hover': {
                     color: '#6366F1'
@@ -257,7 +283,7 @@ export default function Layout({ children }: LayoutProps) {
               </Button>
               <Button
                 sx={{
-                  color: 'white',
+                  color: theme => isDarkMode ? 'white' : 'text.primary',
                   fontSize: '1rem',
                   '&:hover': {
                     color: '#6366F1'
@@ -268,6 +294,7 @@ export default function Layout({ children }: LayoutProps) {
               >
                 Contact Us
               </Button>
+              <ThemeToggleButton />
             </Stack>
             <IconButton
               color="inherit"
@@ -308,7 +335,10 @@ export default function Layout({ children }: LayoutProps) {
           elevation={0}
           sx={{ 
             backdropFilter: 'blur(8px)',
-            backgroundColor: 'rgba(15, 23, 42, 0.85)', // Darker blue-gray matching theme
+            backgroundColor: theme => 
+              isDarkMode 
+                ? 'rgba(15, 23, 42, 0.85)'
+                : 'rgba(248, 250, 252, 0.85)',
             width: '100%'
           }}
         >
@@ -329,13 +359,14 @@ export default function Layout({ children }: LayoutProps) {
               direction="row" 
               spacing={2}
               sx={{
-                display: { xs: 'none', md: 'flex' }
+                display: { xs: 'none', md: 'flex' },
+                alignItems: 'center'
               }}
             >
               <Button
                 onClick={handleAboutClick}
                 sx={{
-                  color: 'white',
+                  color: theme => isDarkMode ? 'white' : 'text.primary',
                   fontSize: '1rem',
                   '&:hover': {
                     color: '#6366F1'
@@ -347,7 +378,7 @@ export default function Layout({ children }: LayoutProps) {
               </Button>
               <Button
                 sx={{
-                  color: 'white',
+                  color: theme => isDarkMode ? 'white' : 'text.primary',
                   fontSize: '1rem',
                   '&:hover': {
                     color: '#6366F1'
@@ -358,6 +389,7 @@ export default function Layout({ children }: LayoutProps) {
               >
                 Contact Us
               </Button>
+              <ThemeToggleButton />
             </Stack>
             <IconButton
               color="inherit"
@@ -387,7 +419,7 @@ export default function Layout({ children }: LayoutProps) {
             flexGrow: 1,
             p: { xs: 2, sm: 4, md: 6 },
             width: '100%',
-            pt: '80px', // Changed from marginTop to paddingTop for better spacing
+            pt: '80px',
           }}
         >
           {children}

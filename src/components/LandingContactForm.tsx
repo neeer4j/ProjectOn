@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import emailjs from '@emailjs/browser';
+import { useTheme } from '../context/ThemeContext';
 
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
@@ -23,7 +24,9 @@ emailjs.init(EMAILJS_PUBLIC_KEY);
 const StyledTextField = styled(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
-      borderColor: 'rgba(255, 255, 255, 0.23)',
+      borderColor: theme.palette.mode === 'dark' 
+        ? 'rgba(255, 255, 255, 0.23)' 
+        : 'rgba(15, 23, 42, 0.23)',
     },
     '&:hover fieldset': {
       borderColor: theme.palette.primary.main,
@@ -31,6 +34,16 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
     '&.Mui-focused fieldset': {
       borderColor: theme.palette.primary.main,
     },
+  },
+  '& .MuiInputLabel-root': {
+    color: theme.palette.mode === 'dark' 
+      ? 'rgba(255, 255, 255, 0.7)' 
+      : 'rgba(15, 23, 42, 0.7)',
+  },
+  '& .MuiOutlinedInput-input': {
+    color: theme.palette.mode === 'dark' 
+      ? 'rgba(255, 255, 255, 0.9)' 
+      : 'rgba(15, 23, 42, 0.9)',
   },
 }));
 
@@ -52,6 +65,7 @@ const LandingContactForm = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { isDarkMode } = useTheme();
 
   const validateEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -144,9 +158,12 @@ const LandingContactForm = () => {
     <Box
       sx={{
         width: '100%',
-        background: 'rgba(15, 23, 42, 0.6)',
+        background: theme => isDarkMode 
+          ? 'rgba(15, 23, 42, 0.6)'
+          : 'rgba(255, 255, 255, 0.9)',
         backdropFilter: 'blur(10px)',
         borderRadius: 2,
+        border: theme => `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.1)'}`,
         py: { xs: 6, md: 8 },
         px: { xs: 2, sm: 4 },
       }}
@@ -167,8 +184,12 @@ const LandingContactForm = () => {
         <Typography
           variant="h6"
           align="center"
-          color="text.secondary"
-          sx={{ mb: 4 }}
+          sx={{ 
+            mb: 4,
+            color: theme => isDarkMode 
+              ? 'rgba(255, 255, 255, 0.7)'
+              : 'rgba(15, 23, 42, 0.7)',
+          }}
         >
           Have questions? We'd love to hear from you.
         </Typography>

@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { keyframes } from '@mui/system';
+import { useTheme } from '../context/ThemeContext';
 
 const gradient = keyframes`
   0% {
@@ -29,6 +30,8 @@ const pulse = keyframes`
 `;
 
 const Loading = () => {
+  const { isDarkMode } = useTheme();
+
   return (
     <Box
       sx={{
@@ -41,7 +44,9 @@ const Loading = () => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'linear-gradient(-45deg, #0F172A, #1E293B, #0F172A, #1E293B)',
+        background: isDarkMode
+          ? 'linear-gradient(-45deg, #0F172A, #1E293B, #0F172A, #1E293B)'
+          : 'linear-gradient(-45deg, #F8FAFC, #F1F5F9, #F8FAFC, #F1F5F9)',
         backgroundSize: '400% 400%',
         animation: `${gradient} 15s ease infinite`,
         zIndex: 9999,
@@ -71,7 +76,7 @@ const Loading = () => {
           sx={{
             width: '60px',
             height: '60px',
-            border: '3px solid rgba(99, 102, 241, 0.3)',
+            border: theme => `3px solid ${isDarkMode ? 'rgba(99, 102, 241, 0.3)' : 'rgba(99, 102, 241, 0.2)'}`,
             borderTop: '3px solid #6366F1',
             borderRadius: '50%',
             animation: 'spin 1s linear infinite',

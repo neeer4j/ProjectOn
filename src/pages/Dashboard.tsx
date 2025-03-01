@@ -20,6 +20,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useRef, useEffect } from 'react';
 import LandingContactForm from '../components/LandingContactForm';
+import { useTheme } from '../context/ThemeContext';
 
 const GradientText = styled('h1')({
   background: 'linear-gradient(90deg, #6366F1, #EC4899)',
@@ -56,6 +57,7 @@ export default function Home() {
   const navigate = useNavigate();
   const aboutRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
+  const { isDarkMode } = useTheme();
   
   useEffect(() => {
     // Handle initial load and subsequent hash changes
@@ -200,7 +202,7 @@ export default function Home() {
       {/* Services Section */}
       <Box sx={{ 
         py: { xs: 8, md: 12 }, 
-        bgcolor: '#0F172A',
+        bgcolor: theme => isDarkMode ? '#0F172A' : '#F8FAFC',
         position: 'relative',
         overflow: 'hidden',
         '&::before': {
@@ -210,17 +212,26 @@ export default function Home() {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'linear-gradient(180deg, rgba(15, 23, 42, 0.3) 0%, rgba(15, 23, 42, 0.9) 100%)',
+          background: theme => isDarkMode
+            ? 'linear-gradient(180deg, rgba(15, 23, 42, 0.3) 0%, rgba(15, 23, 42, 0.9) 100%)'
+            : 'linear-gradient(180deg, rgba(248, 250, 252, 0.3) 0%, rgba(248, 250, 252, 0.9) 100%)',
           zIndex: 0
         }
       }}>
         <Container maxWidth={false} sx={{ px: { xs: 2, sm: 4, md: 6 }, position: 'relative', zIndex: 1 }}>
           <Box textAlign="center" mb={8} sx={{ maxWidth: '800px', mx: 'auto' }}>
-            <Typography variant="h3" gutterBottom sx={{ fontWeight: 700, color: 'white' }}>
+            <Typography variant="h3" gutterBottom sx={{ 
+              fontWeight: 700, 
+              color: theme => isDarkMode ? 'white' : '#1E293B'
+            }}>
               Our Services
             </Typography>
-            <Typography variant="h6" sx={{ color: 'rgba(255, 255, 255, 0.8)', maxWidth: 600, mx: 'auto' }}>
-            With a passion for innovation and a commitment to quality, ProjectOn is here to bring your projects to life. Let's create something amazing together!
+            <Typography variant="h6" sx={{ 
+              color: theme => isDarkMode ? 'rgba(255, 255, 255, 0.8)' : 'rgba(15, 23, 42, 0.8)',
+              maxWidth: 600, 
+              mx: 'auto' 
+            }}>
+              With a passion for innovation and a commitment to quality, ProjectOn is here to bring your projects to life. Let's create something amazing together!
             </Typography>
           </Box>
 
@@ -241,14 +252,18 @@ export default function Home() {
                     sx={{
                       height: '100%',
                       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                      background: 'rgba(30, 41, 59, 0.5)',
+                      background: theme => isDarkMode 
+                        ? 'rgba(30, 41, 59, 0.5)'
+                        : 'rgba(255, 255, 255, 0.9)',
                       backdropFilter: 'blur(8px)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      border: theme => `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.1)'}`,
                       willChange: 'transform',
                       '&:hover': {
                         transform: 'translateY(-8px)',
-                        background: 'rgba(30, 41, 59, 0.8)',
-                        boxShadow: '0 12px 40px -8px rgba(0, 0, 0, 0.5)',
+                        background: theme => isDarkMode 
+                          ? 'rgba(30, 41, 59, 0.8)'
+                          : 'rgba(255, 255, 255, 1)',
+                        boxShadow: '0 12px 40px -8px rgba(0, 0, 0, 0.2)',
                         '& .icon-wrapper': {
                           background: 'linear-gradient(135deg, #6366F1 0%, #0EA5E9 100%)',
                           transform: 'scale(1.1)',
@@ -286,13 +301,13 @@ export default function Home() {
                       </Box>
                       <Typography variant="h5" gutterBottom sx={{ 
                         fontWeight: 600, 
-                        color: 'white',
+                        color: theme => isDarkMode ? 'white' : '#1E293B',
                         mb: 2
                       }}>
                         {service.title}
                       </Typography>
                       <Typography sx={{ 
-                        color: 'rgba(255, 255, 255, 0.7)',
+                        color: theme => isDarkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(15, 23, 42, 0.8)',
                         lineHeight: 1.7
                       }}>
                         {service.description}
@@ -312,15 +327,18 @@ export default function Home() {
         id="about"
         sx={{ 
           py: { xs: 8, md: 12 }, 
-          bgcolor: '#0F172A',
-          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+          bgcolor: theme => isDarkMode ? '#0F172A' : '#F8FAFC',
+          borderTop: theme => `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.1)'}`,
           position: 'relative',
           scrollMarginTop: '80px',
         }}
       >
         <Container maxWidth={false} sx={{ px: { xs: 2, sm: 4, md: 6 } }}>
           <Box textAlign="center" mb={6} sx={{ maxWidth: '900px', mx: 'auto' }}>
-            <Typography variant="h3" gutterBottom sx={{ fontWeight: 700, color: 'white' }}>
+            <Typography variant="h3" gutterBottom sx={{ 
+              fontWeight: 700, 
+              color: theme => isDarkMode ? 'white' : '#1E293B'
+            }}>
               About Us
             </Typography>
             
@@ -333,7 +351,7 @@ export default function Home() {
               <Typography 
                 variant="body1" 
                 sx={{ 
-                  color: 'rgba(255, 255, 255, 0.8)',
+                  color: theme => isDarkMode ? 'rgba(255, 255, 255, 0.8)' : 'rgba(15, 23, 42, 0.8)',
                   fontSize: { xs: '1rem', md: '1.1rem' },
                   lineHeight: 1.8,
                   maxWidth: '900px',
@@ -356,14 +374,17 @@ Their mission is simple: to empower businesses and students alike with technolog
       <Box 
         sx={{ 
           py: { xs: 8, md: 12 }, 
-          bgcolor: '#0F172A',
-          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+          bgcolor: theme => isDarkMode ? '#0F172A' : '#F8FAFC',
+          borderTop: theme => `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.1)'}`,
           position: 'relative',
         }}
       >
         <Container maxWidth={false} sx={{ px: { xs: 2, sm: 4, md: 6 } }}>
           <Box textAlign="center" mb={6} sx={{ maxWidth: '900px', mx: 'auto' }}>
-            <Typography variant="h3" gutterBottom sx={{ fontWeight: 700, color: 'white' }}>
+            <Typography variant="h3" gutterBottom sx={{ 
+              fontWeight: 700, 
+              color: theme => isDarkMode ? 'white' : '#1E293B'
+            }}>
               What We Offer
             </Typography>
             
@@ -376,7 +397,7 @@ Their mission is simple: to empower businesses and students alike with technolog
               <Typography 
                 variant="body1" 
                 sx={{ 
-                  color: 'rgba(255, 255, 255, 0.8)',
+                  color: theme => isDarkMode ? 'rgba(255, 255, 255, 0.8)' : 'rgba(15, 23, 42, 0.8)',
                   fontSize: '1.1rem',
                   lineHeight: 1.8,
                   maxWidth: '900px',
@@ -394,79 +415,40 @@ Their mission is simple: to empower businesses and students alike with technolog
                 mx: 'auto',
                 px: { xs: 2, md: 4 },
                 py: { xs: 3, md: 4 },
-                background: 'rgba(30, 41, 59, 0.5)',
+                background: theme => isDarkMode 
+                  ? 'rgba(30, 41, 59, 0.5)'
+                  : 'rgba(255, 255, 255, 0.9)',
                 backdropFilter: 'blur(8px)',
                 borderRadius: 4,
-                border: '1px solid rgba(255, 255, 255, 0.1)',
+                border: theme => `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.1)'}`,
               }}>
                 <Stack spacing={2} sx={{ maxWidth: '600px', mx: 'auto' }}>
-                  <Typography 
-                    sx={{ 
-                      color: 'rgba(255, 255, 255, 0.9)',
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: 1,
-                      fontSize: { xs: '1rem', md: '1.1rem' },
-                      px: { xs: 1, md: 0 }
-                    }}
-                  >
-                    ✔️ Custom Web Applications
-                  </Typography>
-                  <Typography 
-                    sx={{ 
-                      color: 'rgba(255, 255, 255, 0.9)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 1,
-                      fontSize: { xs: '1rem', md: '1.1rem' },
-                      px: { xs: 1, md: 0 }
-                    }}
-                  >
-                    ✔️ High-Performance Mobile Apps (iOS & Android)
-                  </Typography>
-                  <Typography 
-                    sx={{ 
-                      color: 'rgba(255, 255, 255, 0.9)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 1,
-                      fontSize: { xs: '1rem', md: '1.1rem' },
-                      px: { xs: 1, md: 0 }
-                    }}
-                  >
-                    ✔️ Scalable & Secure Software Solutions
-                  </Typography>
-                  <Typography 
-                    sx={{ 
-                      color: 'rgba(255, 255, 255, 0.9)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 1,
-                      fontSize: { xs: '1rem', md: '1.1rem' },
-                      px: { xs: 1, md: 0 }
-                    }}
-                  >
-                    ✔️ UI/UX Design for Seamless User Experience
-                  </Typography>
-                  <Typography 
-                    sx={{ 
-                      color: 'rgba(255, 255, 255, 0.9)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 1,
-                      fontSize: { xs: '1rem', md: '1.1rem' },
-                      px: { xs: 1, md: 0 }
-                    }}
-                  >
-                    ✔️ End-to-End Development Support
-                  </Typography>
+                  {['Custom Web Applications',
+                    'High-Performance Mobile Apps (iOS & Android)',
+                    'Scalable & Secure Software Solutions',
+                    'UI/UX Design for Seamless User Experience',
+                    'End-to-End Development Support'].map((item, index) => (
+                    <Typography 
+                      key={index}
+                      sx={{ 
+                        color: theme => isDarkMode ? 'rgba(255, 255, 255, 0.9)' : 'rgba(15, 23, 42, 0.9)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 1,
+                        fontSize: { xs: '1rem', md: '1.1rem' },
+                        px: { xs: 1, md: 0 }
+                      }}
+                    >
+                      ✔️ {item}
+                    </Typography>
+                  ))}
                 </Stack>
               </Box>
 
               <Typography 
                 variant="h6" 
                 sx={{ 
-                  color: 'white',
+                  color: theme => isDarkMode ? 'white' : '#1E293B',
                   textAlign: 'center',
                   mt: 6,
                   fontWeight: 500
@@ -485,7 +467,7 @@ Their mission is simple: to empower businesses and students alike with technolog
         id="contact"
         sx={{
           py: { xs: 8, md: 12 },
-          background: '#0F172A',
+          background: theme => isDarkMode ? '#0F172A' : '#F8FAFC',
           position: 'relative',
           overflow: 'hidden',
           scrollMarginTop: '80px',
@@ -496,7 +478,9 @@ Their mission is simple: to empower businesses and students alike with technolog
             left: 0,
             right: 0,
             height: '1px',
-            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)',
+            background: theme => `linear-gradient(90deg, transparent, ${
+              isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(15,23,42,0.1)'
+            }, transparent)`,
           },
         }}
       >
@@ -536,58 +520,63 @@ Their mission is simple: to empower businesses and students alike with technolog
                       justifyContent: 'center'
                     }}
                   >
-                    <Grid item xs={12} sm={6} md={5}>
-                      <Box sx={{ 
-                        p: { xs: 3, md: 4 }, 
-                        textAlign: 'center',
-                        height: '100%',
-                        background: 'rgba(30, 41, 59, 0.5)',
-                        backdropFilter: 'blur(8px)',
-                        borderRadius: 2,
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                        transition: 'transform 0.3s ease-in-out',
-                        '&:hover': {
-                          transform: 'translateY(-4px)',
-                        }
-                      }}>
-                        <EmailIcon sx={{ fontSize: 40, color: '#6366F1', mb: 2 }} />
-                        <Typography variant="h6" sx={{ color: 'white', mb: 1 }}>
-                          Email Us
-                        </Typography>
-                        <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                          connect.projecton@gmail.com
-                        </Typography>
-                        <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)', mt: 1 }}>
-                          Let's discuss your next project!
-                        </Typography>
-                      </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={5}>
-                      <Box sx={{ 
-                        p: { xs: 3, md: 4 }, 
-                        textAlign: 'center',
-                        height: '100%',
-                        background: 'rgba(30, 41, 59, 0.5)',
-                        backdropFilter: 'blur(8px)',
-                        borderRadius: 2,
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                        transition: 'transform 0.3s ease-in-out',
-                        '&:hover': {
-                          transform: 'translateY(-4px)',
-                        }
-                      }}>
-                        <PhoneIcon sx={{ fontSize: 40, color: '#6366F1', mb: 2 }} />
-                        <Typography variant="h6" sx={{ color: 'white', mb: 1 }}>
-                          Call Us
-                        </Typography>
-                        <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                          +91 9995772632
-                        </Typography>
-                        <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                          Mon - Fri, 9:00 - 18:00
-                        </Typography>
-                      </Box>
-                    </Grid>
+                    {[
+                      {
+                        icon: <EmailIcon sx={{ fontSize: 40, color: '#6366F1', mb: 2 }} />,
+                        title: 'Email Us',
+                        content: [
+                          'connect.projecton@gmail.com',
+                          'Let\'s discuss your next project!'
+                        ]
+                      },
+                      {
+                        icon: <PhoneIcon sx={{ fontSize: 40, color: '#6366F1', mb: 2 }} />,
+                        title: 'Call Us',
+                        content: [
+                          '+91 9995772632',
+                          'Mon - Fri, 9:00 - 18:00'
+                        ]
+                      }
+                    ].map((item, index) => (
+                      <Grid item xs={12} sm={6} md={5} key={index}>
+                        <Box sx={{ 
+                          p: { xs: 3, md: 4 }, 
+                          textAlign: 'center',
+                          height: '100%',
+                          background: theme => isDarkMode 
+                            ? 'rgba(30, 41, 59, 0.5)'
+                            : 'rgba(255, 255, 255, 0.9)',
+                          backdropFilter: 'blur(8px)',
+                          borderRadius: 2,
+                          border: theme => `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.1)'}`,
+                          transition: 'transform 0.3s ease-in-out',
+                          '&:hover': {
+                            transform: 'translateY(-4px)',
+                          }
+                        }}>
+                          {item.icon}
+                          <Typography variant="h6" sx={{ 
+                            color: theme => isDarkMode ? 'white' : '#1E293B',
+                            mb: 1 
+                          }}>
+                            {item.title}
+                          </Typography>
+                          {item.content.map((text, i) => (
+                            <Typography 
+                              key={i} 
+                              sx={{ 
+                                color: theme => isDarkMode 
+                                  ? 'rgba(255, 255, 255, 0.7)' 
+                                  : 'rgba(15, 23, 42, 0.8)',
+                                mt: i > 0 ? 1 : 0
+                              }}
+                            >
+                              {text}
+                            </Typography>
+                          ))}
+                        </Box>
+                      </Grid>
+                    ))}
                   </Grid>
                 </Box>
               </motion.div>

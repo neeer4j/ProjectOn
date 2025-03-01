@@ -78,6 +78,10 @@ export default function Layout({ children }: LayoutProps) {
     }
   };
 
+  const closeDrawer = () => {
+    setMobileOpen(false);
+  };
+
   const drawer = (
     <Box>
       <Toolbar sx={{ height: 80 }}>
@@ -86,15 +90,22 @@ export default function Layout({ children }: LayoutProps) {
           sx={{ 
             fontWeight: 800,
             letterSpacing: '-0.02em',
+            fontSize: { xs: '1.75rem', sm: '2rem' }
           }}
-          onClick={() => navigate('/')}
+          onClick={() => {
+            navigate('/');
+            closeDrawer();
+          }}
         >
           ProjectOn
         </GradientTypography>
       </Toolbar>
       <List>
         <Button
-          onClick={() => navigate('/')}
+          onClick={() => {
+            navigate('/');
+            closeDrawer();
+          }}
           startIcon={
             <ListItemIcon sx={{ 
               color: location.pathname === '/' ? '#6366F1' : 'inherit',
@@ -122,7 +133,10 @@ export default function Layout({ children }: LayoutProps) {
           Home
         </Button>
         <Button
-          onClick={() => navigate('/projects')}
+          onClick={() => {
+            navigate('/projects');
+            closeDrawer();
+          }}
           startIcon={
             <ListItemIcon sx={{ 
               color: location.pathname === '/projects' ? '#6366F1' : 'inherit',
@@ -150,7 +164,10 @@ export default function Layout({ children }: LayoutProps) {
           Our Projects
         </Button>
         <Button
-          onClick={handleAboutClick}
+          onClick={() => {
+            handleAboutClick();
+            closeDrawer();
+          }}
           startIcon={
             <ListItemIcon sx={{ minWidth: 40 }}>
               <InfoIcon />
@@ -168,7 +185,10 @@ export default function Layout({ children }: LayoutProps) {
           About Us
         </Button>
         <Button
-          onClick={handleContactClick}
+          onClick={() => {
+            handleContactClick();
+            closeDrawer();
+          }}
           startIcon={
             <ListItemIcon sx={{ minWidth: 40 }}>
               <ContactIcon />
@@ -259,6 +279,18 @@ export default function Layout({ children }: LayoutProps) {
             </IconButton>
           </Toolbar>
         </AppBar>
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onClose={() => setMobileOpen(false)}
+          ModalProps={{ keepMounted: true }}
+          sx={{
+            display: { xs: 'block', md: 'none' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          }}
+        >
+          {drawer}
+        </Drawer>
         <Box component="main" sx={{ width: '100%', flexGrow: 1 }}>
           {children}
         </Box>
@@ -337,6 +369,18 @@ export default function Layout({ children }: LayoutProps) {
             </IconButton>
           </Toolbar>
         </AppBar>
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onClose={() => setMobileOpen(false)}
+          ModalProps={{ keepMounted: true }}
+          sx={{
+            display: { xs: 'block', md: 'none' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          }}
+        >
+          {drawer}
+        </Drawer>
         <Box
           component="main"
           sx={{

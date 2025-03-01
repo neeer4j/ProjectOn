@@ -125,8 +125,8 @@ export default function Home() {
               >
                 <GradientTypography variant="h1" sx={{ 
                   fontWeight: 800, 
-                  mb: 4,
-                  fontSize: { xs: '4.5rem', sm: '7rem', md: '11rem' },
+                  mb: { xs: 2, md: 4 },
+                  fontSize: { xs: '3rem', sm: '7rem', md: '11rem' },
                   lineHeight: 1,
                   textAlign: 'center',
                   letterSpacing: '-0.02em',
@@ -135,15 +135,16 @@ export default function Home() {
                   ProjectOn.
                 </GradientTypography>
                 <Typography variant="h4" sx={{ 
-                  mb: 6, 
+                  mb: { xs: 4, md: 6 }, 
                   lineHeight: 1.4,
                   color: '#ffffff',
                   textAlign: 'center',
                   textShadow: '0 2px 4px rgba(0,0,0,0.3)',
-                  fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
+                  fontSize: { xs: '1.25rem', sm: '2rem', md: '2.5rem' },
                   fontWeight: 500,
                   maxWidth: '900px',
-                  mx: 'auto'
+                  mx: 'auto',
+                  px: { xs: 2, md: 0 }
                 }}>
                   Code. Create. Innovate. – Powering the Future with Software.
                 </Typography>
@@ -177,6 +178,7 @@ export default function Home() {
         py: { xs: 8, md: 12 }, 
         bgcolor: '#0F172A',
         position: 'relative',
+        overflow: 'hidden',
         '&::before': {
           content: '""',
           position: 'absolute',
@@ -198,36 +200,43 @@ export default function Home() {
             </Typography>
           </Box>
 
-          <Grid container spacing={4}>
+          <Grid container spacing={{ xs: 2, md: 4 }}>
             {services.map((service, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
+                  transition={{ 
+                    duration: 0.4,
+                    delay: index * 0.1,
+                    ease: "easeOut"
+                  }}
+                  viewport={{ once: true, margin: "-50px" }}
                 >
                   <Card
                     sx={{
                       height: '100%',
-                      transition: 'all 0.3s ease-in-out',
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                       background: 'rgba(30, 41, 59, 0.5)',
                       backdropFilter: 'blur(8px)',
                       border: '1px solid rgba(255, 255, 255, 0.1)',
+                      willChange: 'transform',
                       '&:hover': {
                         transform: 'translateY(-8px)',
                         background: 'rgba(30, 41, 59, 0.8)',
                         boxShadow: '0 12px 40px -8px rgba(0, 0, 0, 0.5)',
                         '& .icon-wrapper': {
                           background: 'linear-gradient(135deg, #6366F1 0%, #0EA5E9 100%)',
+                          transform: 'scale(1.1)',
                           '& svg': {
                             color: 'white',
+                            transform: 'scale(1.1)',
                           }
                         }
                       }
                     }}
                   >
-                    <CardContent sx={{ p: 4, textAlign: 'center' }}>
+                    <CardContent sx={{ p: { xs: 3, md: 4 }, textAlign: 'center' }}>
                       <Box 
                         className="icon-wrapper"
                         sx={{ 
@@ -240,19 +249,28 @@ export default function Home() {
                           justifyContent: 'center',
                           mx: 'auto',
                           background: 'rgba(99, 102, 241, 0.1)',
-                          transition: 'all 0.3s ease-in-out',
+                          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                          willChange: 'transform',
                           '& svg': {
                             color: '#6366F1',
-                            transition: 'all 0.3s ease-in-out',
+                            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                            willChange: 'transform',
                           }
                         }}
                       >
                         {service.icon}
                       </Box>
-                      <Typography variant="h5" gutterBottom sx={{ fontWeight: 600, color: 'white' }}>
+                      <Typography variant="h5" gutterBottom sx={{ 
+                        fontWeight: 600, 
+                        color: 'white',
+                        mb: 2
+                      }}>
                         {service.title}
                       </Typography>
-                      <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                      <Typography sx={{ 
+                        color: 'rgba(255, 255, 255, 0.7)',
+                        lineHeight: 1.7
+                      }}>
                         {service.description}
                       </Typography>
                     </CardContent>
@@ -292,7 +310,7 @@ export default function Home() {
                 variant="body1" 
                 sx={{ 
                   color: 'rgba(255, 255, 255, 0.8)',
-                  fontSize: '1.1rem',
+                  fontSize: { xs: '1rem', md: '1.1rem' },
                   lineHeight: 1.8,
                   maxWidth: '900px',
                   mx: 'auto',
@@ -347,7 +365,7 @@ export default function Home() {
                 maxWidth: '800px', 
                 mx: 'auto',
                 px: { xs: 2, md: 4 },
-                py: 4,
+                py: { xs: 3, md: 4 },
                 background: 'rgba(30, 41, 59, 0.5)',
                 backdropFilter: 'blur(8px)',
                 borderRadius: 4,
@@ -358,9 +376,10 @@ export default function Home() {
                     sx={{ 
                       color: 'rgba(255, 255, 255, 0.9)',
                       display: 'flex',
-                      alignItems: 'center',
+                      alignItems: 'flex-start',
                       gap: 1,
-                      fontSize: '1.1rem'
+                      fontSize: { xs: '1rem', md: '1.1rem' },
+                      px: { xs: 1, md: 0 }
                     }}
                   >
                     ✔️ Custom Web Applications
@@ -371,7 +390,8 @@ export default function Home() {
                       display: 'flex',
                       alignItems: 'center',
                       gap: 1,
-                      fontSize: '1.1rem'
+                      fontSize: { xs: '1rem', md: '1.1rem' },
+                      px: { xs: 1, md: 0 }
                     }}
                   >
                     ✔️ High-Performance Mobile Apps (iOS & Android)
@@ -382,7 +402,8 @@ export default function Home() {
                       display: 'flex',
                       alignItems: 'center',
                       gap: 1,
-                      fontSize: '1.1rem'
+                      fontSize: { xs: '1rem', md: '1.1rem' },
+                      px: { xs: 1, md: 0 }
                     }}
                   >
                     ✔️ Scalable & Secure Software Solutions
@@ -393,7 +414,8 @@ export default function Home() {
                       display: 'flex',
                       alignItems: 'center',
                       gap: 1,
-                      fontSize: '1.1rem'
+                      fontSize: { xs: '1rem', md: '1.1rem' },
+                      px: { xs: 1, md: 0 }
                     }}
                   >
                     ✔️ UI/UX Design for Seamless User Experience
@@ -404,7 +426,8 @@ export default function Home() {
                       display: 'flex',
                       alignItems: 'center',
                       gap: 1,
-                      fontSize: '1.1rem'
+                      fontSize: { xs: '1rem', md: '1.1rem' },
+                      px: { xs: 1, md: 0 }
                     }}
                   >
                     ✔️ End-to-End Development Support
@@ -437,7 +460,7 @@ export default function Home() {
           bgcolor: '#0F172A',
           borderTop: '1px solid rgba(255, 255, 255, 0.1)',
           position: 'relative',
-          scrollMarginTop: '80px', // Add offset for fixed header
+          scrollMarginTop: '80px',
         }}
       >
         <Container maxWidth={false} sx={{ px: { xs: 2, sm: 4, md: 6 } }}>
@@ -466,60 +489,76 @@ export default function Home() {
                 Get in touch with us for any questions about our services or to discuss your next project.
               </Typography>
               
-              <Grid container spacing={4} sx={{ maxWidth: '800px', mx: 'auto' }}>
-                <Grid item xs={12} sm={6}>
-                  <Box sx={{ 
-                    p: 4, 
-                    textAlign: 'center',
-                    height: '100%',
-                    background: 'rgba(30, 41, 59, 0.5)',
-                    backdropFilter: 'blur(8px)',
-                    borderRadius: 2,
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    transition: 'transform 0.3s ease-in-out',
-                    '&:hover': {
-                      transform: 'translateY(-4px)',
-                    }
-                  }}>
-                    <EmailIcon sx={{ fontSize: 40, color: '#6366F1', mb: 2 }} />
-                    <Typography variant="h6" sx={{ color: 'white', mb: 1 }}>
-                      Email Us
-                    </Typography>
-                    <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                      connect.projecton@gmail.com
-                    </Typography>
-                    <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)', mt: 1 }}>
-                      Let's discuss your next project!
-                    </Typography>
-                  </Box>
+              <Box sx={{ 
+                display: 'flex', 
+                justifyContent: 'center',
+                width: '100%',
+                maxWidth: '1000px',
+                mx: 'auto'
+              }}>
+                <Grid 
+                  container 
+                  spacing={{ xs: 2, md: 4 }} 
+                  sx={{ 
+                    width: 'auto',
+                    margin: { xs: '-16px', md: '0 auto' },
+                    justifyContent: 'center'
+                  }}
+                >
+                  <Grid item xs={12} sm={6} md={5}>
+                    <Box sx={{ 
+                      p: { xs: 3, md: 4 }, 
+                      textAlign: 'center',
+                      height: '100%',
+                      background: 'rgba(30, 41, 59, 0.5)',
+                      backdropFilter: 'blur(8px)',
+                      borderRadius: 2,
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      transition: 'transform 0.3s ease-in-out',
+                      '&:hover': {
+                        transform: 'translateY(-4px)',
+                      }
+                    }}>
+                      <EmailIcon sx={{ fontSize: 40, color: '#6366F1', mb: 2 }} />
+                      <Typography variant="h6" sx={{ color: 'white', mb: 1 }}>
+                        Email Us
+                      </Typography>
+                      <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                        connect.projecton@gmail.com
+                      </Typography>
+                      <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)', mt: 1 }}>
+                        Let's discuss your next project!
+                      </Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={5}>
+                    <Box sx={{ 
+                      p: { xs: 3, md: 4 }, 
+                      textAlign: 'center',
+                      height: '100%',
+                      background: 'rgba(30, 41, 59, 0.5)',
+                      backdropFilter: 'blur(8px)',
+                      borderRadius: 2,
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      transition: 'transform 0.3s ease-in-out',
+                      '&:hover': {
+                        transform: 'translateY(-4px)',
+                      }
+                    }}>
+                      <PhoneIcon sx={{ fontSize: 40, color: '#6366F1', mb: 2 }} />
+                      <Typography variant="h6" sx={{ color: 'white', mb: 1 }}>
+                        Call Us
+                      </Typography>
+                      <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                        +91 9995772632
+                      </Typography>
+                      <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                        Mon - Fri, 9:00 - 18:00
+                      </Typography>
+                    </Box>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Box sx={{ 
-                    p: 4, 
-                    textAlign: 'center',
-                    height: '100%',
-                    background: 'rgba(30, 41, 59, 0.5)',
-                    backdropFilter: 'blur(8px)',
-                    borderRadius: 2,
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    transition: 'transform 0.3s ease-in-out',
-                    '&:hover': {
-                      transform: 'translateY(-4px)',
-                    }
-                  }}>
-                    <PhoneIcon sx={{ fontSize: 40, color: '#6366F1', mb: 2 }} />
-                    <Typography variant="h6" sx={{ color: 'white', mb: 1 }}>
-                      Call Us
-                    </Typography>
-                    <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                      +91 9995772632
-                    </Typography>
-                    <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                      Mon - Fri, 9:00 - 18:00
-                    </Typography>
-                  </Box>
-                </Grid>
-              </Grid>
+              </Box>
             </motion.div>
           </Box>
         </Container>

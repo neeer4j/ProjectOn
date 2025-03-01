@@ -52,7 +52,8 @@ export default function Projects() {
             sx={{ 
               color: 'white',
               fontWeight: 700,
-              fontSize: { xs: '2.5rem', md: '3.5rem' }
+              fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' },
+              px: { xs: 2, md: 0 }
             }}
           >
             Featured Projects
@@ -63,14 +64,16 @@ export default function Projects() {
               color: 'rgba(255, 255, 255, 0.8)',
               maxWidth: '800px',
               mx: 'auto',
-              mb: 6
+              mb: 6,
+              fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' },
+              px: { xs: 2, md: 0 }
             }}
           >
             Discover our latest work and innovative solutions
           </Typography>
         </Box>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={{ xs: 2, md: 4 }}>
           {projects.map((project, index) => (
             <Grid item xs={12} key={project.title}>
               <motion.div
@@ -85,6 +88,8 @@ export default function Projects() {
                     overflow: 'hidden',
                     boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
                     transition: 'transform 0.3s ease-in-out',
+                    background: 'rgba(30, 41, 59, 0.5)',
+                    backdropFilter: 'blur(8px)',
                     '&:hover': {
                       transform: 'translateY(-8px)',
                       '& .project-image': {
@@ -93,7 +98,7 @@ export default function Projects() {
                     }
                   }}
                 >
-                  <Box sx={{ position: 'relative', height: 300, overflow: 'hidden' }}>
+                  <Box sx={{ position: 'relative', height: { xs: 200, sm: 250, md: 300 }, overflow: 'hidden' }}>
                     <CardMedia
                       component="img"
                       image={project.image}
@@ -116,24 +121,54 @@ export default function Projects() {
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'flex-end',
-                        p: 3
+                        p: { xs: 2, sm: 3 }
                       }}
                     >
-                      <Typography variant="h4" sx={{ color: 'white', fontWeight: 700, mb: 1 }}>
+                      <Typography 
+                        variant="h4" 
+                        sx={{ 
+                          color: 'white', 
+                          fontWeight: 700, 
+                          mb: 1,
+                          fontSize: { xs: '1.5rem', sm: '2rem', md: '2.25rem' }
+                        }}
+                      >
                         {project.title}
                       </Typography>
-                      <Typography variant="subtitle1" sx={{ color: 'rgba(255,255,255,0.9)' }}>
+                      <Typography 
+                        variant="subtitle1" 
+                        sx={{ 
+                          color: 'rgba(255,255,255,0.9)',
+                          fontSize: { xs: '1rem', sm: '1.1rem' }
+                        }}
+                      >
                         {project.subtitle}
                       </Typography>
                     </Box>
                   </Box>
 
-                  <CardContent sx={{ p: 4 }}>
-                    <Typography variant="body1" sx={{ mb: 3, color: 'text.secondary', lineHeight: 1.7 }}>
+                  <CardContent sx={{ p: { xs: 2, sm: 3, md: 4 } }}>
+                    <Typography 
+                      variant="body1" 
+                      sx={{ 
+                        mb: 3, 
+                        color: 'text.secondary', 
+                        lineHeight: 1.7,
+                        fontSize: { xs: '0.9rem', sm: '1rem' }
+                      }}
+                    >
                       {project.description}
                     </Typography>
 
-                    <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ mb: 4 }}>
+                    <Stack 
+                      direction="row" 
+                      spacing={1} 
+                      flexWrap="wrap" 
+                      sx={{ 
+                        mb: 4,
+                        gap: { xs: 0.5, sm: 1 }
+                      }}
+                    >
                       {project.technologies.map((tech) => (
                         <Chip
                           key={tech}
@@ -143,6 +178,8 @@ export default function Projects() {
                             background: 'rgba(99, 102, 241, 0.1)',
                             color: '#6366F1',
                             fontWeight: 500,
+                            fontSize: { xs: '0.75rem', sm: '0.875rem' },
+                            height: { xs: 24, sm: 32 },
                             '&:hover': {
                               background: 'rgba(99, 102, 241, 0.2)',
                             }
@@ -157,7 +194,7 @@ export default function Projects() {
                       sx={{
                         borderTop: '1px solid',
                         borderColor: 'divider',
-                        pt: 3
+                        pt: { xs: 2, sm: 3 }
                       }}
                     >
                       <Button
@@ -167,6 +204,9 @@ export default function Projects() {
                         target="_blank"
                         rel="noopener noreferrer"
                         sx={{
+                          py: { xs: 1, sm: 1.5 },
+                          px: { xs: 3, sm: 4 },
+                          fontSize: { xs: '0.875rem', sm: '1rem' },
                           background: 'linear-gradient(45deg, #6366F1 30%, #EC4899 90%)',
                           boxShadow: '0 4px 14px 0 rgba(99, 102, 241, 0.4)',
                           '&:hover': {

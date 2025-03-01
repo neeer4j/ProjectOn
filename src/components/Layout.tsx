@@ -33,6 +33,20 @@ export default function Layout({ children }: LayoutProps) {
   const isHomePage = location.pathname === '/';
   const isProjectsPage = location.pathname === '/projects';
 
+  const handleAboutClick = () => {
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleContactClick = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const drawer = (
     <Box>
       <Toolbar sx={{ height: 80 }}>
@@ -106,6 +120,7 @@ export default function Layout({ children }: LayoutProps) {
           Our Projects
         </Button>
         <Button
+          onClick={handleAboutClick}
           startIcon={
             <ListItemIcon sx={{ minWidth: 40 }}>
               <InfoIcon />
@@ -123,6 +138,7 @@ export default function Layout({ children }: LayoutProps) {
           About Us
         </Button>
         <Button
+          onClick={handleContactClick}
           startIcon={
             <ListItemIcon sx={{ minWidth: 40 }}>
               <ContactIcon />
@@ -178,6 +194,7 @@ export default function Layout({ children }: LayoutProps) {
               }}
             >
               <Button
+                onClick={handleAboutClick}
                 sx={{
                   color: 'white',
                   fontSize: '1rem',
@@ -198,6 +215,7 @@ export default function Layout({ children }: LayoutProps) {
                   }
                 }}
                 startIcon={<ContactIcon />}
+                onClick={handleContactClick}
               >
                 Contact Us
               </Button>
@@ -255,6 +273,7 @@ export default function Layout({ children }: LayoutProps) {
               }}
             >
               <Button
+                onClick={handleAboutClick}
                 sx={{
                   color: 'white',
                   fontSize: '1rem',
@@ -275,6 +294,7 @@ export default function Layout({ children }: LayoutProps) {
                   }
                 }}
                 startIcon={<ContactIcon />}
+                onClick={handleContactClick}
               >
                 Contact Us
               </Button>

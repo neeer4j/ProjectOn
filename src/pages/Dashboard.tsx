@@ -23,6 +23,7 @@ import {
   Twitter
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { useRef, useEffect } from 'react';
 
 const GradientTypography = styled(Typography)({
   background: 'linear-gradient(90deg, #6366F1, #EC4899)',
@@ -50,7 +51,18 @@ const services = [
 
 export default function Home() {
   const navigate = useNavigate();
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
   
+  useEffect(() => {
+    // Check if URL has #about or #contact hash
+    if (window.location.hash === '#about') {
+      aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
+    } else if (window.location.hash === '#contact') {
+      contactRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
   return (
     <Box sx={{ overflowX: 'hidden' }}>
       {/* Hero Section */}
@@ -249,16 +261,21 @@ export default function Home() {
       </Box>
 
       {/* About Founders Section */}
-      <Box sx={{ 
-        py: { xs: 8, md: 12 }, 
-        bgcolor: '#0F172A',
-        borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-        position: 'relative',
-      }}>
+      <Box 
+        ref={aboutRef}
+        id="about"
+        sx={{ 
+          py: { xs: 8, md: 12 }, 
+          bgcolor: '#0F172A',
+          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+          position: 'relative',
+          scrollMarginTop: '80px',
+        }}
+      >
         <Container maxWidth={false} sx={{ px: { xs: 2, sm: 4, md: 6 } }}>
           <Box textAlign="center" mb={6} sx={{ maxWidth: '900px', mx: 'auto' }}>
             <Typography variant="h3" gutterBottom sx={{ fontWeight: 700, color: 'white' }}>
-              Who We Are
+              About Us
             </Typography>
             
             <motion.div
@@ -278,11 +295,34 @@ export default function Home() {
                   px: { xs: 2, md: 4 }
                 }}
               >
-                Four passionate Computer Science graduates came together with a shared vision—to build innovative software solutions that push the boundaries of technology. Driven by their love for coding, problem-solving, and cutting-edge advancements, they founded ProjectOn, a platform dedicated to creating web apps, mobile applications, and scalable software for businesses and individuals.
+                Four passionate Computer Science graduates came together with a shared vision—to build innovative software solutions that push the boundaries of technology. Driven by their love for coding, problem-solving, and cutting-edge advancements, they founded ProjectOn, a platform dedicated to creating web apps, mobile applications, and scalable software for businesses and individuals. With expertise in development, UI/UX design, and system architecture, they strive to turn ideas into reality, ensuring high-quality, user-friendly, and future-ready solutions. Their mission is simple: to empower businesses with technology and make a lasting impact in the digital world.
               </Typography>
-              
-              <Box sx={{ my: 4, width: '100%', maxWidth: '100px', height: '4px', background: 'linear-gradient(45deg, #6366F1 30%, #0EA5E9 90%)', mx: 'auto' }} />
-              
+            </motion.div>
+          </Box>
+        </Container>
+      </Box>
+
+      {/* What We Offer Section */}
+      <Box 
+        sx={{ 
+          py: { xs: 8, md: 12 }, 
+          bgcolor: '#0F172A',
+          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+          position: 'relative',
+        }}
+      >
+        <Container maxWidth={false} sx={{ px: { xs: 2, sm: 4, md: 6 } }}>
+          <Box textAlign="center" mb={6} sx={{ maxWidth: '900px', mx: 'auto' }}>
+            <Typography variant="h3" gutterBottom sx={{ fontWeight: 700, color: 'white' }}>
+              What We Offer
+            </Typography>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
               <Typography 
                 variant="body1" 
                 sx={{ 
@@ -291,10 +331,93 @@ export default function Home() {
                   lineHeight: 1.8,
                   maxWidth: '900px',
                   mx: 'auto',
-                  px: { xs: 2, md: 4 }
+                  px: { xs: 2, md: 4 },
+                  textAlign: 'center',
+                  mb: 6
                 }}
               >
-                With expertise in development, UI/UX design, and system architecture, they strive to turn ideas into reality, ensuring high-quality, user-friendly, and future-ready solutions. Their mission is simple: to empower businesses with technology and make a lasting impact in the digital world.
+                At ProjectOn, we turn ideas into reality by crafting cutting-edge web apps, mobile apps, and digital solutions tailored to your needs. Whether you're a startup looking for a sleek website, a business in need of a high-performance mobile app, or an entrepreneur with a groundbreaking tech idea, we've got you covered.
+              </Typography>
+
+              <Box sx={{ 
+                maxWidth: '800px', 
+                mx: 'auto',
+                px: { xs: 2, md: 4 },
+                py: 4,
+                background: 'rgba(30, 41, 59, 0.5)',
+                backdropFilter: 'blur(8px)',
+                borderRadius: 4,
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+              }}>
+                <Stack spacing={2} sx={{ maxWidth: '600px', mx: 'auto' }}>
+                  <Typography 
+                    sx={{ 
+                      color: 'rgba(255, 255, 255, 0.9)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 1,
+                      fontSize: '1.1rem'
+                    }}
+                  >
+                    ✔️ Custom Web Applications
+                  </Typography>
+                  <Typography 
+                    sx={{ 
+                      color: 'rgba(255, 255, 255, 0.9)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 1,
+                      fontSize: '1.1rem'
+                    }}
+                  >
+                    ✔️ High-Performance Mobile Apps (iOS & Android)
+                  </Typography>
+                  <Typography 
+                    sx={{ 
+                      color: 'rgba(255, 255, 255, 0.9)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 1,
+                      fontSize: '1.1rem'
+                    }}
+                  >
+                    ✔️ Scalable & Secure Software Solutions
+                  </Typography>
+                  <Typography 
+                    sx={{ 
+                      color: 'rgba(255, 255, 255, 0.9)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 1,
+                      fontSize: '1.1rem'
+                    }}
+                  >
+                    ✔️ UI/UX Design for Seamless User Experience
+                  </Typography>
+                  <Typography 
+                    sx={{ 
+                      color: 'rgba(255, 255, 255, 0.9)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 1,
+                      fontSize: '1.1rem'
+                    }}
+                  >
+                    ✔️ End-to-End Development Support
+                  </Typography>
+                </Stack>
+              </Box>
+
+              <Typography 
+                variant="h6" 
+                sx={{ 
+                  color: 'white',
+                  textAlign: 'center',
+                  mt: 6,
+                  fontWeight: 500
+                }}
+              >
+                Get in touch today and start your journey with ProjectOn!
               </Typography>
             </motion.div>
           </Box>
@@ -302,12 +425,17 @@ export default function Home() {
       </Box>
 
       {/* Contact Us Section */}
-      <Box sx={{ 
-        py: { xs: 8, md: 12 }, 
-        bgcolor: '#0F172A',
-        borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-        position: 'relative',
-      }}>
+      <Box 
+        ref={contactRef}
+        id="contact"
+        sx={{ 
+          py: { xs: 8, md: 12 }, 
+          bgcolor: '#0F172A',
+          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+          position: 'relative',
+          scrollMarginTop: '80px', // Add offset for fixed header
+        }}
+      >
         <Container maxWidth={false} sx={{ px: { xs: 2, sm: 4, md: 6 } }}>
           <Box textAlign="center" mb={6} sx={{ maxWidth: '900px', mx: 'auto' }}>
             <Typography variant="h3" gutterBottom sx={{ fontWeight: 700, color: 'white' }}>
